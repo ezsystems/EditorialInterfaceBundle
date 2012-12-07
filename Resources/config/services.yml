@@ -1,13 +1,13 @@
 parameters:
     editorial_interface.twig.extension.content.class: EzSystems\EditorialInterfaceBundle\Twig\Extension\ContentExtension
     editorial_interface.pre_content_view_listener.class: EzSystems\EditorialInterfaceBundle\EventListener\PreContentViewListener
-    editorial_interface.twig.extension.data_prefix: 'data-ez-'
+    editorial_interface.data_attribute_prefix: 'data-ez-'
 
 services:
 
     editorial_interface.twig.extension.content:
         class: %editorial_interface.twig.extension.content.class%
-        arguments: [@service_container, @ezpublish.api.repository, @ezpublish.config.resolver, %editorial_interface.twig.extension.data_prefix%]
+        arguments: [@service_container, @ezpublish.api.repository, @ezpublish.config.resolver, %editorial_interface.data_prefix%]
         tags:
             - {name: twig.extension}
 
@@ -16,6 +16,6 @@ services:
 
     editorial_interface.pre_content_view_listener:
         class: %editorial_interface.pre_content_view_listener.class%
-        arguments: [@ezpublish.api.repository, %editorial_interface.twig.extension.data_prefix%]
+        arguments: [@ezpublish.api.repository, %editorial_interface.data_attribute_prefix%]
         tags:
             - {name: kernel.event_listener, event: ezpublish.pre_content_view, method: onPreContentView}
