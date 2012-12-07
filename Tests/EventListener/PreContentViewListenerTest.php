@@ -97,7 +97,6 @@ class PreContentViewListenerTest extends PHPUnit_Framework_TestCase
             )
         );
 
-
         return $tests;
     }
 
@@ -208,6 +207,5 @@ class PreContentViewListenerTest extends PHPUnit_Framework_TestCase
             ->will( $this->returnValue( $canEdit ) );
         return $mock;
     }
-
 
 }

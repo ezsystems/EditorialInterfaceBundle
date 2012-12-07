@@ -14,7 +14,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-
 class eZEditorialInterfaceExtension extends Extension
 {
     public function load( array $configs, ContainerBuilder $container )
