@@ -25,15 +25,21 @@ class ContentExtension extends CoreContentExtension
      */
     protected $repository;
 
-    const DATA_PREFIX = 'data-ez-';
-
+    /**
+     * The prefix of the meta data attribute
+     *
+     * @var string
+     */
+    protected $prefix;
 
     public function __construct(
-        ContainerInterface $container, Repository $repository, ConfigResolverInterface $resolver
+        ContainerInterface $container, Repository $repository,
+        ConfigResolverInterface $resolver, $prefix
     )
     {
         parent::__construct( $container, $resolver );
         $this->repository = $repository;
+        $this->prefix = (string)$prefix;
     }
 
     /**
@@ -48,12 +54,12 @@ class ContentExtension extends CoreContentExtension
         $versionInfo = $content->getVersionInfo();
 
         return array(
-            self::DATA_PREFIX . 'field-id' => $field->id,
-            self::DATA_PREFIX . 'field-identifier' => $field->fieldDefIdentifier,
-            self::DATA_PREFIX . 'field-type-identifier' => $this->getFieldTypeIdentifier( $content, $field ),
-            self::DATA_PREFIX . 'content-id' => $versionInfo->getContentInfo()->id,
-            self::DATA_PREFIX . 'version' => $versionInfo->versionNo,
-            self::DATA_PREFIX . 'locale-code' => $field->languageCode
+            $this->prefix . 'field-id' => $field->id,
+            $this->prefix . 'field-identifier' => $field->fieldDefIdentifier,
+            $this->prefix . 'field-type-identifier' => $this->getFieldTypeIdentifier( $content, $field ),
+            $this->prefix . 'content-id' => $versionInfo->getContentInfo()->id,
+            $this->prefix . 'version' => $versionInfo->versionNo,
+            $this->prefix . 'locale-code' => $field->languageCode
         );
     }
 

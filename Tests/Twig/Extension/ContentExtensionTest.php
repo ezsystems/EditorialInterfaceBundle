@@ -25,7 +25,7 @@ class ContentExtensionTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerTestMedata
      */
-    public function testMetadata( Content $content, $fieldIdentifier, $canEdit, $expectedTplParameters )
+    public function testMetadata( Content $content, $fieldIdentifier, $canEdit, $prefix, $expectedTplParameters )
     {
         $extensionMock = $this->getMock(
             'EzSystems\\EditorialInterfaceBundle\\Twig\\Extension\\ContentExtension',
@@ -33,7 +33,8 @@ class ContentExtensionTest extends PHPUnit_Framework_TestCase
             array(
                 $this->getContainerMock(),
                 $this->getRepositoryMock( $content, $canEdit ),
-                $this->getConfigResolverMock()
+                $this->getConfigResolverMock(),
+                $prefix
             )
         );
         $extensionMock->expects( $this->any() )
@@ -47,6 +48,7 @@ class ContentExtensionTest extends PHPUnit_Framework_TestCase
 
     public function providerTestMedata()
     {
+        $prefix = 'data-ez-';
         $fieldsInfo = array(
             'eztext' => array(
                 'id' => 1,
@@ -81,24 +83,53 @@ class ContentExtensionTest extends PHPUnit_Framework_TestCase
                 $content,
                 'name',
                 false,
+                $prefix,
                 $baseResults
             )
         );
         $editResults = $baseResults;
         $editResults['attr'] += array(
-            ContentExtension::DATA_PREFIX . 'field-id' => $name->id,
-            ContentExtension::DATA_PREFIX . 'field-identifier' => $name->fieldDefIdentifier,
-            ContentExtension::DATA_PREFIX . 'field-type-identifier' => 'eztext',
-            ContentExtension::DATA_PREFIX . 'content-id' => $contentInfo->id,
-            ContentExtension::DATA_PREFIX . 'version' => $versionInfo->versionNo,
-            ContentExtension::DATA_PREFIX . 'locale-code' => $name->languageCode,
+            $prefix . 'field-id' => $name->id,
+            $prefix . 'field-identifier' => $name->fieldDefIdentifier,
+            $prefix . 'field-type-identifier' => 'eztext',
+            $prefix . 'content-id' => $contentInfo->id,
+            $prefix . 'version' => $versionInfo->versionNo,
+            $prefix . 'locale-code' => $name->languageCode,
         );
         $tests[] = array(
             $this->getContent( $fieldsInfo ),
             'name',
             true,
+            $prefix,
             $editResults
         );
+        $tests[] = array(
+            $this->getContent( $fieldsInfo ),
+            'name',
+            false,
+            $prefix . $prefix,
+            $baseResults
+        );
+
+        $editResultsDblPrefix = $baseResults;
+        $editResultsDblPrefix['attr'] += array(
+            $prefix . $prefix . 'field-id' => $name->id,
+            $prefix . $prefix . 'field-identifier' => $name->fieldDefIdentifier,
+            $prefix . $prefix . 'field-type-identifier' => 'eztext',
+            $prefix . $prefix . 'content-id' => $contentInfo->id,
+            $prefix . $prefix . 'version' => $versionInfo->versionNo,
+            $prefix . $prefix . 'locale-code' => $name->languageCode,
+        );
+
+        $tests[] = array(
+            $this->getContent( $fieldsInfo ),
+            'name',
+            true,
+            $prefix . $prefix,
+            $editResultsDblPrefix
+        );
+
+
         return $tests;
     }
 

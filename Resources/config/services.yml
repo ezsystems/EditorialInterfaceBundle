@@ -1,11 +1,12 @@
 parameters:
     editorial_interface.twig.extension.content.class: EzSystems\EditorialInterfaceBundle\Twig\Extension\ContentExtension
+    editorial_interface.twig.extension.data_prefix: 'data-ez-'
 
 services:
 
     editorial_interface.twig.extension.content:
         class: %editorial_interface.twig.extension.content.class%
-        arguments: [@service_container, @ezpublish.api.repository, @ezpublish.config.resolver]
+        arguments: [@service_container, @ezpublish.api.repository, @ezpublish.config.resolver, %editorial_interface.twig.extension.data_prefix%]
         tags:
             - {name: twig.extension}
 
