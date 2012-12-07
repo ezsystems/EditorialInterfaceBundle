@@ -1,0 +1,42 @@
+html.ezp-user-logged-in {
+    > body {
+        
+        .ez-ei-overlay {
+            position:absolute !important;
+            background-color: fade(@yellow-something, 6%);
+            border:1px solid @grey50; 
+            z-index: 44;
+            cursor:pointer;
+
+            .ez-ei-overlay-marker{
+                float: right;
+                min-width:2px;
+                height: 22px;
+                border-left:1px solid @grey50; 
+                border-bottom:1px solid @grey50;
+                font-weight:bold;
+                font-size:11px;
+                padding:4px 4px 0 26px;
+            }
+        }
+
+        .ez-ei-overlay-marker-blocks{
+            background: @yellow-something url('../nein-img/overlay_marker_blocks.png') 5px 5px no-repeat;
+            padding:4px 4px 0 26px !important;
+        }
+        .ez-ei-overlay-marker-image{
+            background: @yellow-something url('../nein-img/overlay_marker_image.png') 5px 5px no-repeat;
+            padding:4px 4px 0 36px !important;
+        }
+        .ez-ei-overlay-marker-text{
+            background: @yellow-something url('../nein-img/overlay_marker_text.png') 5px 2px no-repeat;
+            padding: 4px 4px 0 36px !important;
+        }
+        .ez-ei-overlay-marker-list{
+          background: @yellow-something url('../nein-img/overlay_marker_list.png') 10px 6px no-repeat;
+          padding: 4px 4px 0 30px !important;
+        }
+
+    
+    }
+}

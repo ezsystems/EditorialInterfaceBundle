@@ -1,0 +1,75 @@
+html.ezp-user-logged-in {
+    > body {
+        > div.ez-ei-header {
+            > .ez-ei-header-main-navigation {
+                display: block;
+                float: none;
+                .clearfix();
+                min-height: 67px;
+                padding: 0;
+                ul {
+                    .clearfix();
+                    padding: 0;
+                    li {
+                        display: block;
+                        float: left;
+                        margin-left: 0px;
+                        font-size: 3em;
+                        line-height: 1;
+                        text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5);
+                        width: 20%;
+                        text-align: center;
+                        a {
+                            color: @neutrality;
+                            display: block;
+                            text-decoration: none;
+                            padding: 20px 0;
+                            .border-radius(0);
+                            .transition(all 300ms ease);
+                            span {
+                                &.ez-ei-title {
+                                    display: none;
+                                }
+                                &.ez-ei-icon {
+                                    display: block;
+                                }
+                            }
+                            &:hover {
+                                color: @birch;
+                            }
+                            &:active {
+                                color: @ez-orange;
+                                background: rgba(0, 0, 0, 0.3);
+                                .box-shadow(inset 0 0 5px 0 rgba(0, 0, 0, 0.5));
+                                .transition(none);
+                                span {
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+                        &.selected {
+                            a {
+                                background: @cut-dark;
+                                cursor: default;
+                                color: @sand;
+                                span {
+                                    text-decoration: none;
+                                }
+                                &:active {
+                                    color: @sand;
+                                    background: @cut-dark;
+                                    .box-shadow(none);
+                                }
+                            }
+                        }
+                        &.ez-ei-logout-link {
+                            position: relative;
+                            right: auto;
+                            top: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

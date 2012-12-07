@@ -1,0 +1,92 @@
+
+/* ===========================*/
+/* FO */
+
+.ez-ei-breadcrumbs {
+    float: left;
+    height: 23px;
+    border-top: @grey40 1px solid;
+    border-left: @grey40 1px solid;
+    border-bottom: @grey40 1px solid;
+
+    > a {
+        float: left;
+        display: block;
+        height: 23px;
+        line-height: 23px;
+        color: @grey90;
+        font-size: 12px;
+        font-weight: normal;
+        padding: 0 10px 0 16px;
+
+    }
+
+    .ez-ei-breadcrumbs-close{
+        #gradient > .vertical(@white, @grey10);
+        &:hover{
+            #ez-ei-breadcrumbs-root{
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .ez-ei-breadcrumbs-root{
+        float: left;
+        height: 23px;
+
+        > a {
+            color: @grey90;
+            font-size: 12px;
+        }
+    }
+
+    .ez-ei-breadcrumbs-path{
+        float: left;
+
+        a.ez-ei-breadcrumbs-link{
+            float: left;
+            display: block;
+            height: 23px;
+        }
+
+        .ez-ei-breadcrumbs-path-step{
+            float: left;
+            height: 23px;
+            line-height: 23px;
+            background: url('../nein-img/breadcrumb_plug_23.png') no-repeat left top;
+            padding: 0 7px 0 20px;
+            color: @grey90;
+            font-size: 12px;
+            &:hover {
+                text-decoration:underline;
+            }
+        }
+
+        a.ez-ei-breadcrumbs-link:first-child{
+            .ez-ei-breadcrumbs-path-step{
+                background: url('../nein-img/breadcrumb_plug_23_white.png') no-repeat left top;
+            }
+
+        }
+    }
+}
+
+.ez-ei-breadcrumbs-plug{
+    float:left;
+    width:10px;
+    height:25px;
+    background: url('../nein-img/breadcrumb_plug.png') no-repeat left top;
+    &.white {
+        background: url('../nein-img/breadcrumb_plug_white.png') no-repeat left top;
+    }
+}
+
+.ez-ei-breadcrumbs-current{
+    float: left;
+    padding: 2px 0 0 12px;
+    color: @cut-dark;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.75);
+    line-height: 23px;
+    font-weight: bold;
+    font-size: 12px;
+}

@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en" class="ezp-user-logged-in">
+    <head>
+    <meta charset="utf-8">
+    <title>eZ Demo Design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="eZ Demo Design">
+    <meta name="author" content="Jurij Burkanov">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/beaker.png">
+
+    <script type="text/javascript" src="nein-data/nein-js/tiny_mce/tiny_mce.js"></script>
+    <script src="http://yui.yahooapis.com/3.7.3/build/yui/yui-min.js"></script>
+    <!--<script src="build/yui/yui-min.js"></script>-->
+    <script>
+    YUI_config = {
+        skin: {
+            overrides: {
+                slider: ['boolean-switch']
+            }
+        },
+
+        modules: {
+            'ez-editorial-interface': {
+                name: 'ez-editorial-interface',
+                fullpath: 'nein-data/nein-js/editorial-interface.js',
+                requires: [
+                    'event', 'node-screen', 'node-style', 'widget', 'selector-css3','handlebars', 'json',
+                    'transition', 'dd', 'array-extras', 'stylesheet', 'ez-switches', 'ez-dropdown',
+                    'ez-overlay','ez-focused-overlay','ez-form-editor','ez-expandable', 'ez-progress-bar',
+                    'ez-side-panel','ez-breadcrumbs', 'ez-structure-inspector', 'ez-assets-manager'
+                ]
+            },
+            'ez-switches': {
+                name: 'ez-switches',
+                fullpath: 'nein-data/nein-js/switches.js',
+                requires: ['selector-css3', 'widget']
+            },
+            'ez-dropdown': {
+                name: 'ez-dropdown',
+                fullpath: 'nein-data/nein-js/dropdown.js',
+                requires: ['widget', 'event-outside']
+            },
+            'ez-expandable': {
+                name: 'ez-expandable',
+                fullpath: 'nein-data/nein-js/expandable.js',
+                requires: ['widget','node']
+
+            },
+            'ez-overlay': {
+                name: 'ez-overlay',
+                fullpath: 'nein-data/nein-js/overlay.js',
+                requires: ['widget','node']
+
+            },
+            'ez-focused-overlay': {
+                name: 'ez-focused-overlay',
+                fullpath: 'nein-data/nein-js/focused-overlay.js',
+                requires: ['widget','node']
+
+            },
+            'ez-form-editor': {
+                name: 'ez-form-editor',
+                fullpath: 'nein-data/nein-js/form-editor.js',
+                requires: ['widget','node']
+
+            },
+            'ez-side-panel': {
+                name: 'ez-side-panel',
+                fullpath: 'nein-data/nein-js/side-panel.js',
+                requires: ['widget','node']
+
+            },
+            'ez-breadcrumbs': {
+                name: 'ez-breadcrumbs',
+                fullpath: 'nein-data/nein-js/breadcrumbs.js',
+                requires: ['widget','node']
+
+            },
+            'ez-structure-inspector': {
+                name: 'ez-structure-inspector',
+                fullpath: 'nein-data/nein-js/structure-inspector.js',
+                requires: ['widget','node']
+            },
+            'ez-assets-manager': {
+                name: 'ez-assets-manager',
+                fullpath: 'nein-data/nein-js/assets-manager.js',
+                requires: ['widget','node']
+            },
+            'ez-progress-bar': {
+                name: 'ez-progress-bar',
+                fullpath: 'nein-data/nein-js/progress-bar.js',
+                requires: ['widget','node']
+            }
+
+
+            
+
+        }
+    };
+    YUI().use('event', 'ez-editorial-interface', function (Y) {
+        Y.on('domready', function () {
+            var ei = new Y.eZ.EditorialInterface({
+                mobileBreakPoint: 960,
+                contentNode: '.ez-ei-header'
+
+                // simple dependency injection system
+                // for instance to use Y.eZ.SwitchesSlider even
+                // in normal mode (ie not mobile layout), use
+                // the following line:
+                // dependencies: {
+                //     operationSwitcher: {
+                //         constructor: Y.eZ.SwitchesSlider
+                //         config: {
+                //             srcNode: '.ez-ei-operational-mode-switch'
+                //         }
+                //     }
+                // }
+            });
+            ei.render();
+        });
+    });
+    YUI().use('event', function (Y) {
+        Y.on('domready', function () {
+
+            var h = Y.one('html'),
+                ua = Y.UA;
+
+            // Y.UA is based on the user agent string,
+            // this is bad... but should be used only to fix "small" CSS issues and nicies - for everything else please use feature detection instead
+
+            if ( ua.ie ) {
+                h.addClass('ie').addClass('vers_' + (ua.ie + '').replace('.', '_'));
+            } else if ( ua.webkit ) {
+                h.addClass('webkit').addClass('vers_' + (ua.webkit + '').replace('.', '_'));
+            } else if ( ua.gecko ) {
+                h.addClass('gecko').addClass('vers_' + (ua.gecko + '').replace('.', '_'));
+            }
+        });
+    });
+    </script>
+    <script>
+        tinyMCE.init({
+            theme : "advanced",
+            theme_advanced_toolbar_location : "top",
+            
+            theme_advanced_buttons1 : "bold,italic,underline, strikethrough, separator,justifyleft, justifycenter,justifyright,  justifyfull, separatorbullist,numlist,separator,outdent,indent,separator,undo,redo,separator,link,unlink,anchor,image,cleanup,separator,help,code,separator,sub,sup",
+                        
+            theme_advanced_buttons2: "",
+            theme_advanced_buttons3: "",
+            theme_advanced_buttons4: "",
+            
+            mode : "none"
+        });
+    </script>
+  </head>
+    <body class="ez-ei-viewing-and-editing">
+
+        <header class="ez-ei-content-header">
+            <div class="container">
+                <div class="navbar extra-navi">
+                    <div class="nav-collapse">
+                        <ul class="lang-select">
+                            <li class="current english"><a href="#"><span class="hidden">English</span></a></li>
+                            <li class="french"><a href="#"><span class="hidden">Françe</span></a></li>
+                            <li class="german"><a href="#"><span class="hidden">Deutsch</span></a></li>
+                        </ul>
+                        <ul class="nav" id="ez-ei-editable-region-18" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Top links"data-ez-field-type-identifier="ezselection">
+                            <li>
+                                <a href="http://www.icloud.com">Tag Cloud</a>
+                            </li>
+                            <li>
+                                <a href="#">Register</a>
+                            </li>
+                            <li id="login">
+                                <a href="#login" title="show login form" class="show-login-form">Login</a>
+                                <a href="#" title="hide login form" class="hide-login-form">Login</a>
+                                <form class="login-form span3" action="#" method="get">
+                                    <fieldset>
+                                        <label>
+                                            <span class="hidden">Username</span>
+                                            <input type="text" name="login-username" id="login-username" placeholder="Username">
+                                        </label>
+                                        <label>
+                                            <span class="hidden">Password</span>
+                                            <input type="password" name="login-password" id="login-password" placeholder="Password">
+                                        </label>
+                                        <div class="clearfix">
+                                            <a href="" class="forgot-password">Forgot password?</a>
+                                            <button class="btn btn-warning pull-right" type="submit">
+                                              Login
+                                            </button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </li>
+                            <li>
+                                <a href="#">Sitemap</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span8">
+                        <a href="#" class="logo"><img src="images/logo-ez.png" alt="ez brand mark" id="ez-ei-editable-region-19" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Website Logo" data-ez-field-type-identifier="ezimage" data-ez-editable-region-expandable-attributes='{"Type":"Enterprise"}'/></a>
+                    </div>
+                    <form class="span4 form-search" method="get" action="#" id="site-wide-search">
+                        <label class="pull-right">
+                            <span class="hidden">Search</span>
+                            <input class="search-query span3" type="search" name="site-wide-search-field" id="site-wide-search-field" placeholder="Search..." />
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </header>
+        
+        <div class="navbar main-navi">
+            <div class="navbar-inner">
+                <div class="container">
+                    
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">Navigation</a>
+                    
+                    <div class="nav-collapse">
+                        <ul class="nav" id="ez-ei-editable-region-22" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Navigation menu"data-ez-field-type-identifier="ezselection">
+                            <li class="active">
+                                <a href="#">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">Credit Cards</a>
+                            </li>
+                            <li>
+                                <a href="#">Blog</a>
+                            </li>
+                            <li>
+                                <a href="#">Extras</a>
+                            </li>
+                            <li>
+                                <a href="#">Profiles</a>
+                            </li>
+                            <li>
+                                <a href="#">Web Store</a>
+                            </li>
+                            <li>
+                                <a href="#">Features</a>
+                            </li>
+                            <li>
+                                <a href="#">Support</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="navbar-inner sublevel">
+                <div class="container">
+                    
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li>
+                                <a href="#">Software</a>
+                            </li>
+                            <li>
+                                <a href="#">Compare Editions</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">eZ Publish Enterprise</a>
+                            </li>
+                            <li>
+                                <a href="#">Overview</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="breadcrumb-wrapper nav-collapse">
+                <div class="container">
+                    <ul class="breadcrumb">
+                      <li>
+                        <a href="#">Home</a> <span class="divider">&raquo;</span>
+                      </li>
+                      <li>
+                        <a href="#">Blog</a> <span class="divider">&raquo;</span>
+                      </li>
+                      <li class="active">
+                        Some entry
+                      </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    
+                    <section class="content-view-full">
+                        <article class="class-article" data-ez-editable-region="true" data-ez-editable-region-level="1" id="ez-ei-editable-region-1" data-ez-field-identifier="Article" >
+                            
+                            <div class="attribute-header" >
+                                <h1 id="ez-ei-editable-region-151" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-1" data-ez-field-identifier="Article header" data-ez-field-type-identifier="ezstring">This is a 1-st level headline</h1>
+                            </div>
+                            
+                            <div class="attribute-byline">
+                                <span class="date">
+                                    23/01/12 11:56
+                                </span>
+                                -
+                                <span class="author">
+                                    John Doe
+                                </span>
+                            </div>
+                            
+                            <div class="attribute-image full-head" id="ez-ei-editable-region-9" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-1" data-ez-field-identifier="Image with caption" >
+                                <img src="images/test-pictures/geiranger.jpg" alt="Geiranger" id="ez-ei-editable-region-152" data-ez-editable-region="true" data-ez-editable-region-level="3" data-ez-editable-region-parent="ez-ei-editable-region-9" data-ez-field-identifier="Image" data-ez-field-type-identifier="ezimage" data-ez-editable-region-expandable-attributes='{"Image properties":"100% JPEG - 3.4 Mb - 1280x768","Metadata":"Mountains and clouds"}'>
+                                
+                                <div class="attribute-caption" id="ez-ei-editable-region-159" data-ez-editable-region="true" data-ez-editable-region-level="3" data-ez-editable-region-parent="ez-ei-editable-region-9" data-ez-field-identifier="Image caption" data-ez-field-type-identifier="ezstring" >
+                                    Some description to the picture
+                                </div>
+                            </div>
+                            
+                            <div class="attribute-long" id="ez-ei-editable-region-153" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-1" data-ez-field-identifier="Article text" data-ez-field-type-identifier="eztext">
+                                <p>
+                                    <strong>
+                                    Once upon a time there lived a young girl, called Cinderella. She had a step-mother and two ugly step-sisters, who were very <a href="#">unkind to her</a>. One day, a prince invited them to a ball. The ugly sisters went, but Cinderella had to stay at home. As she was sitting by the fireside crying, her fairy god-mother suddenly appeared before her.
+                                    </strong>
+                                </p>
+                            
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+                                </p>
+                                
+                            </div>
+                            
+                            <div class="attribute-header">
+                                <h3 id="ez-ei-editable-region-158" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-1" data-ez-field-identifier="Subheader" data-ez-field-type-identifier="ezstring">Trying out other picture position</h3>
+                            </div>
+                            
+                            <div class="attribute-image content-view-embed pull-left" id="ez-ei-editable-region-162" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-1" data-ez-field-identifier="Image with caption">
+                                <div class="attribute-image">
+                                    <img src="images/test-pictures/cat-helmet.jpg" alt="Cat" id="ez-ei-editable-region-163" data-ez-editable-region="true" data-ez-editable-region-level="3" data-ez-editable-region-parent="ez-ei-editable-region-162" data-ez-field-identifier="Image" data-ez-field-type-identifier="ezimage" data-ez-editable-region-expandable-attributes='{"Image properties":"100% JPEG - 1.6 Mb - 1300x568","Metadata":"Strange cat with even stranger hat"}'>
+                                </div>
+                                <div class="attribute-caption" id="ez-ei-editable-region-164" data-ez-editable-region="true" data-ez-editable-region-level="3" data-ez-editable-region-parent="ez-ei-editable-region-162" data-ez-field-identifier="Subheader" data-ez-field-type-identifier="ezstring">
+                                    Some description to the picture
+                                </div>
+                            </div>
+                            
+                            <div class="attribute-long" id="ez-ei-editable-region-161" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-1" data-ez-field-identifier="Article text" data-ez-field-type-identifier="eztext">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+                                </p>
+                            
+                                <p>
+                                    Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.<br/><br/>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                                </p>
+                            </div>
+
+                        </article>
+
+                        <div class="attribute-header">
+                            <h3 id="ez-ei-editable-region-156" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Comment form header" data-ez-field-type-identifier="ezstring">Post a comment</h3>
+                        </div>
+
+                        <form method="post" action="/~ls/ezdemodesign_dev/index.php/eng/content/action" class="feedback-form">
+
+                            <div class="row">
+                                <div class="span4">
+                                    <div class="attribute-sender-name">
+                                        <label for="ContentObjectAttribute_ezstring_data_text_248">
+                                            Sender name
+                                        </label>
+                                        <input class="box span4" type="text" size="70" name="ContentObjectAttribute_ezstring_data_text_248" value="">
+                                    </div>
+                                </div>
+                                <div class="span4">
+                                    <label for="ContentObjectAttribute_data_text_251">
+                                        Email
+                                    </label>
+                                    <div class="attribute-email">
+                                        <input class="box span4" type="text" size="20" name="ContentObjectAttribute_data_text_251" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="span8">
+                                    <label for="ContentObjectAttribute_ezstring_data_text_249">
+                                        Subject
+                                    </label>
+                                    <div class="attribute-subject">
+                                        <input class="box span8" type="text" size="70" name="ContentObjectAttribute_ezstring_data_text_249" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="span8">
+                                    <label for="ContentObjectAttribute_data_text_250">
+                                        Message
+                                    </label>
+                                    <div class="attribute-subject">
+                                        <textarea class="box span8" name="ContentObjectAttribute_data_text_250" cols="70" rows="10"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-action">
+                                <input type="submit" class="btn btn-warning pull-right" name="ActionCollectInformation" value="Send form">
+                                <input type="hidden" name="ContentNodeID" value="65">
+                                <input type="hidden" name="ContentObjectID" value="65">
+                                <input type="hidden" name="ViewMode" value="full">
+                            </div>
+
+                        </form>
+
+                        <div class="attribute-header">
+                            <h3 id="ez-ei-editable-region-157" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Comments list header" data-ez-field-type-identifier="ezstring">Comments</h3>
+                        </div>
+                        <div class="comment" id="ez-ei-editable-region-400" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Comment" >
+                            <div class="profile-picture">
+                                <img src="images/user.gif" alt="Desert" >
+                            </div>
+                            <div class="comment-content-wrapper">
+                                <div class="header">
+                                    <span class="profile-name" id="ez-ei-editable-region-401" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-400" data-ez-field-identifier="Comment author" data-ez-field-type-identifier="ezstring">
+                                        Bård Farstad
+                                    </span>
+                                    <span class="comment-date pull-right">
+                                        23/01/2012 14:00
+                                    </span>
+                                </div>
+                                <div class="comment-headline" id="ez-ei-editable-region-402" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-400" data-ez-field-identifier="Comment title" data-ez-field-type-identifier="ezstring">Da pannekaken h&oslash;rte dette, ble den redd, og rett som det var, s&aring; vendte den.</div>
+                                <div class="comment-body" id="ez-ei-editable-region-403" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-400" data-ez-field-identifier="Comment text" data-ez-field-type-identifier="eztext">
+                                    Da pannekaken h&oslash;rte dette, ble den redd, og rett som det var, s&aring; vendte den seg av seg selv og ville ut av pannen; men den falt ned igjen p&aring; den andre siden, og da den hadde stekt seg litt p&aring; den ogs&aring;, s&aring; den ble fastere i fisken, spratt den ut p&aring; gulvet.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment" id="ez-ei-editable-region-500" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Comment">
+                            <div class="profile-picture">
+                                <img src="images/test-pictures/desert.jpg" alt="Desert">
+                            </div>
+                            <div class="comment-content-wrapper">
+                                <div class="header">
+                                    <span class="profile-name" id="ez-ei-editable-region-501" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-500" data-ez-field-identifier="Comment author" data-ez-field-type-identifier="ezstring">
+                                        Bård Farstad
+                                    </span>
+                                    <span class="comment-date pull-right">
+                                        23/01/2012 14:00
+                                    </span>
+                                </div>
+                                <div class="comment-body" id="ez-ei-editable-region-503" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-500" data-ez-field-identifier="Comment text" data-ez-field-type-identifier="eztext">
+                                    Da pannekaken h&oslash;rte dette, ble den redd, og rett som det var, s&aring; vendte den seg av seg selv og ville ut av pannen; men den falt ned igjen p&aring; den andre siden, og da den hadde stekt seg litt p&aring; den ogs&aring;, s&aring; den ble fastere i fisken, spratt den ut p&aring; gulvet.
+                                </div>
+                            </div>
+                        </div>
+
+                            
+
+                    </section>
+                </div>
+                <div class="span4">
+                    <aside>
+                        <section class="content-view-aside" id="ez-ei-editable-region-33" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-editable-region-parent="ez-ei-editable-region-2" data-ez-field-identifier="Aside section">
+                            
+                            <div class="product-main">
+                                <div class="attribute-header">
+                                    <h2 id="ez-ei-editable-region-331" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-33" data-ez-field-identifier="Header" data-ez-field-type-identifier="ezstring" >Title of the product</h2>
+                                    <span class="subheadline">Product number</span>
+                                </div>
+                                <article>
+                                    <form action="#" method="get">
+                                        <fieldset class="row">
+                                            <div class="item-price span4" id="ez-ei-editable-region-335" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-33" data-ez-field-identifier="Price tag" data-ez-field-type-identifier="eztext">
+                                                180,- € <span class="old-price">250,- €</span>
+                                            </div>
+                                            <label class="span4">
+                                                <span class="hidden">
+                                                    Color
+                                                </span>
+                                                <select class="span2">
+                                                    <option value="">Color</option>
+                                                    <option value="red">Red</option>
+                                                    <option value="blue">Blue</option>
+                                                    <option value="green">Green</option>
+                                                    <option value="yellow">Yellow</option>
+                                                </select>
+                                            </label>
+                                            <label class="span4">
+                                                <span class="hidden">
+                                                    Size
+                                                </span>
+                                                <select class="span2">
+                                                    <option value="">Size</option>
+                                                    <option value="big">Big</option>
+                                                    <option value="small">Small</option>
+                                                </select>
+                                            </label>
+                                            <div class="item-buying-action form-inline span4">
+                                                <label>
+                                                    <span class="hidden">Amount</span>
+                                                    <input type="text" />
+                                                </label>
+                                                <button class="btn btn-warning" type="submit">
+                                                    Add to cart
+                                                </button>
+                                            </div>
+                                        
+                                        </fieldset>
+                                    </form>
+                                </article>
+                            </div>
+                            
+                            <div class="attribute-header">
+                                <h2 id="ez-ei-editable-region-332" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-33" data-ez-field-identifier="Sub-header" data-ez-field-type-identifier="ezstring" data-ez-editable-region-disabled="true">Teasers</h2>
+                            </div>
+                            <article>
+                                <a href="#" class="teaser-link" title="Read more about classical teaser-type">
+                                    <div class="attribute-image">
+                                        <img src="images/test-pictures/winter.jpg" alt="Winter" id="ez-ei-editable-region-333" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-33" data-ez-field-identifier="Image" data-ez-field-type-identifier="ezimage" >
+                                    </div>
+                                    <div class="attribute-header">
+                                        <h3 id="ez-ei-editable-region-336" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-33" data-ez-field-identifier="Teaser header" data-ez-field-type-identifier="ezstring">This is a classical teaser, with picture atop, sub-headline and some text</h3>
+                                    </div>
+                                </a>
+                                <p class="attribute-short" id="ez-ei-editable-region-337" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-33" data-ez-field-identifier="Teaser text" data-ez-field-type-identifier="eztext">
+                                    Once upon a time there lived a young girl, called Cinderella. She had a step-mother and two ugly step-sisters, who were very unkind to her. One day, a prince invited them to a ball. The ugly sisters went, but Cinderella had to stay at home. As she was sitting by the fireside crying, her fairy god-mother suddenly appeared before her.
+                                </p>
+                            </article>
+                            
+                            <div class="attribute-header">
+                                <h2 id="ez-ei-editable-region-338" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-33" data-ez-field-identifier="Section header" data-ez-field-type-identifier="ezstring">Selected products</h2>
+                            </div>
+                            
+                            <article class="selected-products">
+                                <div class="attribute-image">
+                                    <a href="#" title="go to the product's page">
+                                        <img src="images/test-pictures/desert.jpg" alt="Desert">
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <div class="attribute-header">
+                                        <a href="#" class="teaser-link">
+                                            <h3>Title of the product</h3>
+                                        </a>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li>
+                                            <a href="#">Outdoor</a>
+                                            <span class="divider">»</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">Mountain</a>
+                                        </li>
+                                    </ul>
+                                    <form action="#" method="get">
+                                        <fieldset>
+                                            <div class="item-price">
+                                                180,- €
+                                            </div>
+                                            <div class="item-buying-action form-inline">
+                                                <label>
+                                                    <span class="hidden">Amount</span>
+                                                    <input type="text" />
+                                                </label>
+                                                <button class="btn btn-warning" type="submit">
+                                                    Buy
+                                                </button>
+                                            </div>
+                                            
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </article>
+                            <article class="selected-products">
+                                <div class="attribute-image">
+                                    <a href="#" title="go to the product's page">
+                                        <img src="images/test-pictures/desert.jpg" alt="Desert">
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <div class="attribute-header">
+                                        <a href="#" class="teaser-link">
+                                            <h3>Title of the product</h3>
+                                        </a>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li>
+                                            <a href="#">Outdoor</a>
+                                            <span class="divider">»</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">Mountain</a>
+                                        </li>
+                                    </ul>
+                                    <form action="#" method="get">
+                                        <fieldset>
+                                            <div class="item-price">
+                                                180,- €
+                                            </div>
+                                            <div class="item-buying-action form-inline">
+                                                <label>
+                                                    <span class="hidden">Amount</span>
+                                                    <input type="text" />
+                                                </label>
+                                                <button class="btn btn-warning" type="submit">
+                                                    Buy
+                                                </button>
+                                            </div>
+                                            
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </article>
+                            <article class="selected-products">
+                                <div class="attribute-image">
+                                    <a href="#" title="go to the product's page">
+                                        <img src="images/test-pictures/desert.jpg" alt="Desert">
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <div class="attribute-header">
+                                        <a href="#" class="teaser-link">
+                                            <h3>Title of the product</h3>
+                                        </a>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                        <li>
+                                            <a href="#">Outdoor</a>
+                                            <span class="divider">»</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">Mountain</a>
+                                        </li>
+                                    </ul>
+                                    <form action="#" method="get">
+                                        <fieldset>
+                                            <div class="item-price">
+                                                180,- €
+                                            </div>
+                                            <div class="item-buying-action form-inline">
+                                                <label>
+                                                    <span class="hidden">Amount</span>
+                                                    <input type="text" />
+                                                </label>
+                                                <button class="btn btn-warning" type="submit">
+                                                    Buy
+                                                </button>
+                                            </div>
+                                            
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </article>
+                            
+                        </section>
+                    </aside>
+                </div>
+            </div>
+        </div>
+        
+        <footer id="ez-ei-editable-region-340" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Page footer">
+            <div class="claim-wrapper">
+                <div class="container">
+                    <div class="nav-collapse">
+                        A Greater Measure of Confidence
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="span4" id="ez-ei-editable-region-341" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-340" data-ez-field-identifier="About block" data-ez-field-type-identifier="eztext">
+                        <h3>About</h3>
+                        <address>
+                    <strong>eZ Systems</strong><br>
+                    Klostergata 30<br>
+                    3732 Skien, Norway<br>
+                    +47 22 22 09 50
+                  </address>
+                    </div>
+                    <div class="span4 nav-collapse" id="ez-ei-editable-region-342" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-340" data-ez-field-identifier="News block" data-ez-field-type-identifier="eztext">
+                        <h3>Recent news</h3>
+                        <ul>
+                            <li><a href="#">Mannen som eide kverna</a></li>
+                            <li><a href="#">Dyrt &aring; komme for sent til festen</a></li>
+                            <li><a href="#">Positive til elbiler, men vil ikke ha dem Positive til elbiler, men vil ikke ha dem Positive til elbiler, men vil ikke ha dem Positive til elbiler, men vil ikke ha dem Positive til elbiler, men vil ikke ha dem</a></li>
+                            <li><a href="#">Verdens beste land &aring; investere i</a></li>
+                            <li><a href="#">Grensel&oslash;s publisering</a></li>
+                        </ul>
+                    </div>
+                    <div class="span4 nav-collapse">
+                        <h3 id="ez-ei-editable-region-343" data-ez-editable-region="true" data-ez-editable-region-level="2" data-ez-editable-region-parent="ez-ei-editable-region-340" data-ez-field-identifier="Contact form header" data-ez-field-type-identifier="ezstring">Get in touch</h3>
+                        <form method="get" action="#" class="contact-form" id="contact-form">
+                            <fieldset>
+                                <label>
+                                    <span class="hidden">Name</span>
+                                    <input type="text" name="contact-form-name" id="contact-form-name" placeholder="Name">
+                                </label>
+                                <label>
+                                    <span class="hidden">Phone</span>
+                                    <input type="text" name="contact-form-phone" id="contact-form-phone" placeholder="Phone">
+                                </label>
+                                <label>
+                                    <span class="hidden">E-mail</span>
+                                    <input type="text" name="contact-form-email" id="contact-form-email" placeholder="E-Mail">
+                                </label>
+                                <label>
+                                    <span class="hidden">Message</span>
+                                    <textarea id="contact-form-message" name="contact-form-message" placeholder="Message" rows="3"></textarea>
+                                </label>
+                                <div class="actions">
+                                    <button type="submit" class="btn btn-mini btn-warning pull-right">Send</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Template mummies mausoleum begin-->
+
+        <script id="ezp-nein-left-aside" type="text/x-handlebars-template">
+            <div class="ezp-nein ez-ei-side-panel" id="ez-ei-side-panel-left">
+                <div class="ez-ei-side-panel-trigger"></div>
+                <div  class="ez-ei-side-panel-content">
+                    <div id="ez-ei-structure-inspector"></div>
+                </div>
+                <div class="ez-ei-side-panel-drag-separator"></div>
+            </div>
+        </script>
+
+        <script id="ezp-nein-right-aside" type="text/x-handlebars-template">
+            <div class="ezp-nein ez-ei-side-panel" id="ez-ei-side-panel-right">
+                <div class="ez-ei-side-panel-trigger"></div>
+                <div  class="ez-ei-side-panel-content">
+                    <div id="ez-ei-media-library"></div>
+                </div>
+                <div id="ez-ei-media-uploader" >
+                    <div class="ez-ei-uploading-old-style-workflow">
+                        <input type="file" id="ez-ei-media-drop-file-browse" name="old_style_file_upload" multiple="multiple"/>
+                        <form id="ez-ei-media-uploader-fake-form" action="/nein-data/upload.php" target="hidden-iframe" enctype="multipart/form-data" method="post">
+                        </form>
+                        <iframe id="ez-ei-media-uploader-iframe" name="hidden-iframe" src=""></iframe>
+                    </div>
+
+                    <div class="ez-ei-media-drop-area">
+                        click to select files <br/>
+                        or drag&drop files here
+                    </div>
+                    <div class="ez-ei-media-progress-indicator">
+                        <div class="ez-ei-media-progress-num-files-left">0</div>
+                        <div class="ez-ei-media-progress-num-files-done">0</div>
+                        <div class="ez-ei-media-progress-done-label">all done!</div>
+                    </div>
+                    <ul class="ez-ei-media-area-files-list"></ul>
+                    <div class="ez-ei-media-upload-dialog">
+                        {{#dialogButtons}}
+                        <a href="#{{action}}" class="ez-ei-button ez-ei-media-upload-dialog-button ez-ei-media-upload-dialog-button-{{action}}">
+                            <span>{{label}}</span>
+                        </a>
+                        {{/dialogButtons}}
+                    </div>
+                </div>
+
+                <div class="ez-ei-side-panel-drag-separator"></div>
+            </div>
+        </script>
+
+        <script id="ezp-nein-header" type="text/x-handlebars-template">
+            <div class="ezp-nein ez-ei-header" id="ez-ei-interface-header">
+
+                <div class="ez-ei-header-main-navigation">
+                    <ul>
+                        <li>
+                            <a href="#" title="Site settings">
+                                <span class="ez-ei-icon" data-icon="&#x0070;"></span>
+                                <span class="ez-ei-title">Site settings</span></a>
+                        </li>
+                        <li>
+                            <a href="#" title="Pages and publications">
+                                <span class="ez-ei-icon" data-icon="&#x0027;"></span>
+                                <span class="ez-ei-title">Pages and publications</span>
+                            </a>
+                        </li>
+                        <li class="selected">
+                            <a href="#" title="Content viewing and editing">
+                                <span class="ez-ei-icon" data-icon="&#x0034;"></span>
+                                <span class="ez-ei-title">Content viewing and editing</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="Assets and media">
+                                <span class="ez-ei-icon" data-icon="&#xe061;"></span>
+                                <span class="ez-ei-title">Assets and media</span>
+                            </a>
+                        </li>
+                        <li class="ez-ei-logout-link">
+                            <a href="#logout" title="Logout" class="ez-ei-logout">
+                                <span class="ez-ei-icon" data-icon="&#xe019;"></span>
+                                <span class="ez-ei-title">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="ez-ei-device-selector ez-ei-free-drop-down ez-ei-compact">
+                    <a href="#" class="ez-ei-dropdown-trigger" title="Switching between gadgets to preview on. Currently - desktop">
+                        <span data-icon="&#x004f;" class="ez-ei-marker ez-ei-dropdown-selected-value"></span>
+                        <span data-icon="&#xe01d;" class="ez-ei-arrow"></span>
+                    </a>
+                    <div class="ez-ei-dropdown-options">
+                        <h2>SELECT DEVICE</h2>
+                        <div class="ez-ei-dropdown-option ez-ei-dropdown-selected" data-value="&#x004f;">Desktop</div>
+                        <div class="ez-ei-dropdown-option" data-value="&#x0052;">Tablet</div>
+                        <div class="ez-ei-dropdown-option" data-value="&#x0051;">Mobile phone</div>
+                    </div>
+                </div>
+
+                <div class="ez-ei-switch-container">
+                    <div class="ez-ei-operational-mode-switch ez-ei-double-switch">
+                        <div>
+                            <label for="operational-mode-view">
+                                View
+                                <span data-icon="&#xe005;"></span>
+                            </label>
+                            <input type="radio" name="operational-mode" id="operational-mode-view" value="view" checked="checked" />
+                        </div>
+                        <div>
+                            <label for="operational-mode-edit">
+                                Edit
+                                <span data-icon="&#xe043;"></span>
+                            </label>
+                            <input type="radio" name="operational-mode" id="operational-mode-edit" value="edit" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script id="ezp-nein-dialog-toolbar" type="text/x-handlebars-template">
+            <div id="{{cssPrefix}}{{dialogToolBarId}}" class="{{cssPrefix}} {{dialogClassName}}" >
+
+                <div id="{{cssPrefix}}-version-selector" class="ez-ei-version-selector ez-ei-free-drop-down white ez-ei-compact">
+                    <a href="#" class="ez-ei-dropdown-trigger" title="Switching between versions of content. Currently - ...">
+                        <div class="ez-ei-version-selector-icon"></div>
+                        <span class="ez-ei-marker ez-ei-text ez-ei-dropdown-selected-value">Published version 07.08.2012 19:37</span>
+                        <span data-icon="&#xe01d;" class="ez-ei-arrow"></span>
+                    </a>
+                    <div class="ez-ei-dropdown-options">
+                        <h2>SELECT VERSION</h2>
+                        <div class="ez-ei-dropdown-option" data-value="Published<br/><small>10.08.2012 11:43</small>">Published version - 10.08.2012 11:43</div>
+                        <div class="ez-ei-dropdown-option ez-ei-dropdown-selected" data-value="Published<br/><small>07.08.2012 19:37">Published version - 07.08.2012 19:37</div>
+                        <div class="ez-ei-dropdown-option" data-value="Draft<br/><small>01.08.2012 10:44">Draft version - 01.08.2012 10:44</div>
+                    </div>
+                </div>
+
+                <div class="{{cssPrefix}}-language-selector ez-ei-free-drop-down white ez-ei-compact">
+                    <a href="#" class="ez-ei-dropdown-trigger" title="Switching between language versions of the page. Currently - in English">
+                        <span class="ez-ei-marker ez-ei-text ez-ei-dropdown-selected-value">EN</span>
+                        <span data-icon="&#xe01d;" class="ez-ei-arrow"></span>
+                    </a>
+
+                    <div class="ez-ei-dropdown-options">
+                        <h2>SELECT LANGUAGE</h2>
+                        <div class="ez-ei-dropdown-option" data-value="FR">Français</div>
+                        <div class="ez-ei-dropdown-option ez-ei-dropdown-selected" data-value="EN">English</div>
+                        <div class="ez-ei-dropdown-option" data-value="ES">Español</div>
+                    </div>
+                </div>
+
+                <div class="{{cssPrefix}}-buttons" >
+                    {{#buttons}}
+                        <a href="#{{action}}" class="ez-ei-button {{../cssPrefix}}-button {{../cssPrefix}}-button-{{action}}">
+                            <span data-icon="{{{icon}}}"></span>
+                        </a>
+                    {{/buttons}}
+                </div>
+            </div>
+        </script>
+
+        <script id="ezp-nein-form-text-field" type="text/x-handlebars-template">
+            <div class="content-label"><label>{{label}}:</label></div>
+            <div class="content-input ezstring"><input class="ez-ei-form-editor-focusable" placeholder="text" type="text" value="{{value}}" /></div>
+        </script>
+
+        <script id="ezp-nein-form-image-field" type="text/x-handlebars-template">
+            <div class="content-label"><label>{{label}}:</label></div>
+            <div class="content-input ezimage">
+                <img src="{{imageSource}}" />
+                <div class="image-file-select-wrapper">
+                    <input type="text" class="image-file-select ez-ei-form-editor-focusable" placeholder="image source" value="{{selectFileName}}" />
+                    <div class="image-file-select-button"><span data-icon="{{{selectFileIcon}}}"></span>Choose another picture</div>
+                </div>
+            </div>
+        </script>
+
+        <script id="ezp-nein-form-textarea-field" type="text/x-handlebars-template">
+            <div class="content-label"><label>{{label}}:</label></div>
+            <div class="content-input eztext"><textarea placeholder="text" class="textarea ez-ei-form-editor-focusable">{{{value}}}</textarea></div>
+        </script>
+
+        <script id="ezp-nein-form-plug-field" type="text/x-handlebars-template">
+            <div class="content-label"><label>{{label}}:</label></div>
+            <div class="content-input plug"><strong>{{value}}</strong></div>
+        </script>
+
+        <script id="ezp-nein-dialog-breadcrumbs" type="text/x-handlebars-template">
+            <div class="{{cssPrefix}}-breadcrumbs {{uniqueClass}}">
+                    <a href="#close" class="{{cssPrefix}}-breadcrumbs-close {{uniqueClass}}">
+                        <div class="{{cssPrefix}}-breadcrumbs-root {{uniqueClass}}" >Page</div>
+                    </a>
+                    <div class="{{cssPrefix}}-breadcrumbs-path {{uniqueClass}}" >
+                </div>
+            </div>
+            <div class="{{cssPrefix}}-breadcrumbs-plug {{uniqueClass}}" ></div>
+            <div class="{{cssPrefix}}-breadcrumbs-current {{uniqueClass}}" >Current Node</div>
+        </script>
+
+        <script id="ezp-nein-dialog-breadcrumbs-step" type="text/x-handlebars-template">
+            <a href="#breadcrumb-link" class="{{cssPrefix}}-breadcrumbs-link {{uniqueClass}}" rel="{{rel}}" >
+                <div class="{{cssPrefix}}-breadcrumbs-path-step {{uniqueClass}}">
+                    {{marker}}.{{label}}
+                </div>
+            </a>
+        </script>
+
+        <script id="ezp-nein-progress-bar" type="text/x-handlebars-template">
+            <div class="ez-ei-media-progress-bar-background">
+                <div class="ez-ei-media-progress-bar"></div>
+                <div class="ez-ei-media-progress-bar-frame"></div>
+            </div>
+        </script>
+
+        <!-- Template mummies mausoleum end-->
+        
+    </body>
+</html>

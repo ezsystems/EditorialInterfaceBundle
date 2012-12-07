@@ -1,0 +1,94 @@
+html.ezp-user-logged-in {
+    > body {
+        
+        .ez-ei-form-editor-dialog-content{
+            float:left;
+            display:block;
+            padding:0 5px 10px 5px;
+            .ez-ei-from-editor-dialog-content-group{
+                float:left;
+                margin-bottom:10px;
+                width:100%; 
+                border:1px solid @grey50;
+                background-color: fade(@grey50, 10%);
+                padding-bottom:9px;
+                &:hover {
+                    background-color: fade(@yellow-something,6%) ;
+                    .ez-ei-form-editor-marker {
+                        background-color:@birch;
+                    }
+                }
+                .ez-ei-form-editor-marker {
+                    background-color:@grey20;
+                    float:right;
+                    cursor:pointer;
+                }
+                .ez-ei-from-editor-dialog-content-module {
+                    padding-top:19px;                    
+                    float:left;
+                    overflow:hidden;
+                    width:95%;
+                    &.short {
+                        width:100%;
+                        div.content-input, div.content-label {
+                            float:left;
+                            width:90%;
+                            input {
+                                width:90%;
+                            }
+                        }
+                    }
+                    div.content-input {
+                        float:left;
+                        width:100%;
+                        input, textarea {
+                            margin:0 0 0 10px;
+                            float:left;
+                            width:90%;
+                        }
+                        .image-file-select-wrapper {
+                            width:90%;
+                            height:30px;
+                            overflow:hidden;
+                            padding-top:7px;
+                        }                        
+                        img {
+                            margin:0 0 0 10px;
+                            width:90%;
+                        }
+                        
+                        
+                        
+                    }
+                    div.content-label {
+                        float:left;
+                        width:100%;
+                        label {
+                            float:left;
+                            display:block;
+                            width:90%;
+                            text-align:left;
+                            font-weight:bold;
+                            color:@grey90;
+                            padding:5px 0 0 10px;
+                            &.disabled {
+                                color:@grey50;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        #ez-ei-form-editor-toolbar {
+            .ez-ei-form-editor-buttons {
+                float:left;
+                padding: 10px 5px 10px 10px;
+            }
+
+        }
+        
+    
+    }
+}

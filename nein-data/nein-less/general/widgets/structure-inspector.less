@@ -1,0 +1,63 @@
+#ez-ei-structure-inspector{
+    border-bottom: 1px dashed #b7b7b7;
+    border-top: 1px dashed #b7b7b7;
+    margin: 10px 0 10px 0;
+    padding: 20px 0 20px 0px;
+
+    .ez-ei-structure-inspector-header{
+        font-weight:bold;
+        padding: 0 10px 10px 20px;
+    }
+
+    div.ez-ei-structure-inspector-tree-view {
+
+        li{
+            padding: 5px 0 5px 40px;
+            background-repeat: no-repeat;
+            background-position: 20px 8px;
+            cursor:pointer;
+
+            &.editable {
+                background-color: fade(@yellow-something, 6%);
+                border-bottom: 1px solid @grey10;
+                &:hover{
+                    background-color: fade(@yellow-something, 20%);
+                }
+            }
+
+            &.items-container {
+                background-image: url('../nein-img/overlay_marker_blocks.png');
+            }
+            &.item-text {
+                background-image: url('../nein-img/inspector_marker_text.png');
+            }
+            &.item-image {
+                background-image: url('../nein-img/inspector_marker_image.png');
+            }
+            &.item-invisible {
+                background-image: url('../nein-img/inspector_marker_gear.png');
+            }
+
+            &.ez-ei-structure-inspector-page{
+                background-image: url('../nein-img/inspector_marker_page.png');
+            }
+
+            &.selected {
+                background-color: @grey10;
+            }
+
+
+            a{
+                text-decoration: none;
+                span{
+                    text-decoration: underline;
+                }
+
+            }
+
+
+
+        }
+    }
+
+}

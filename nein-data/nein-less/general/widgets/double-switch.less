@@ -1,0 +1,119 @@
+html.ezp-user-logged-in {
+    > body {
+        .ez-ei-double-switch {
+            display: block;
+            .clearfix();
+            padding: 10px 4px 0 4px;
+            > div {
+                display: block;
+                float: left;
+                > label {
+                    display: block;
+                    position: relative;
+                    line-height: 42px;
+                    color: @grey30;
+                    font-size:12px;
+                    .transition(all 300ms ease);
+                    > span {
+                        display: block;
+                        border: 4px solid rgba(255, 255, 255, 0.1);
+                        .border-radius(4px);
+                        position: absolute;
+                        .box-shadow(inset 0 0 0 1px #444849);
+                        top: 0;
+                        &:before {
+                            display: block;
+                            padding: 5px;
+                            font-size: 24px;
+                            line-height: 1em;
+                        }
+                    }
+                }
+                > input[type="radio"] {
+                    .quasi-hidden();
+                }
+                &.ez-ei-switches-current, &.ez-ei-switches-slider-current {
+                    > label {
+                        color: #f5f3dd;
+                        > span {
+                            &:before {
+                                #gradient > .vertical(@blue-grey, @black);
+                                color: #f5f3dd;
+                                .box-shadow(inset 0 0 5px rgba(0, 0, 0, 0.75));
+                            }
+                        }
+                    }
+                }
+                &:first-child {
+                    margin-right: 5px;
+                    > label {
+                        padding-right: 50px;
+                        > span {
+                            right: 0px;
+                        }
+                    }
+                }
+                &:last-child {
+                    > label {
+                        padding-left: 50px;
+                        > span {
+                            left: 0px;
+                        }
+                    }
+                }
+            }
+            &:not(.ez-ei-switches-disabled) {
+                > div:not(.ez-ei-switches-current) {
+                    > label {
+                        &:hover,
+                        &:focus {
+                            cursor: pointer;
+                            color: @birch;
+                            > span {
+                                border: 4px solid @blue-grey-light;
+                                &:before {
+                                    background-color: rgba(0, 0, 0, 0.2);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.ez-ei-switches-disabled {
+                label {
+                    color: rgba(255, 255, 255, 0.3);
+                    > span {
+                        border-color: transparent;
+                        background: transparent url('../nein-img/diagonal_pattern.png') repeat left bottom;
+                        &:before {
+                            color: rgba(80, 85, 82, 1);
+                        }
+                    }
+                }
+                &:hover,
+                &:focus {
+                    > label {
+                        cursor: help;
+                    }
+                }
+            }
+        }
+    }
+}
+
+html.ezp-user-logged-in.webkit {
+    > body {
+        .ez-ei-double-switch {
+            > div {
+                > label {
+                    > span {
+                        &:before {
+                            padding: 1px 5px 0 5px;
+                            line-height: 34px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

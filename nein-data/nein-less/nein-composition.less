@@ -1,0 +1,71 @@
+// Here is the place, where all styles will be gathered together
+
+@import "nein-variables.less";
+
+
+
+/* General Styles */
+
+    // Layout
+    @import "general/layout";
+
+    // Widgets
+    @import "general/widgets/double-switch";
+    @import "general/widgets/working-bench";
+    @import "general/widgets/linear";
+    @import "general/widgets/dropdown";
+    @import "general/widgets/content-wrapper";
+    @import "general/widgets/header-main-navigation";
+    @import "general/widgets/overlay";
+    @import "general/widgets/focused-overlay";
+    @import "general/widgets/form-editor";
+    @import "general/widgets/expandable";
+    @import "general/widgets/side-panel";
+    @import "general/widgets/breadcrumbs";
+    @import "general/widgets/button";
+    @import "general/widgets/structure-inspector";
+    @import "general/widgets/progress-bar";
+
+
+
+/* Large Styles */
+@media (min-width: @breakpoint_large_min) {
+    
+    // Layout
+    @import "large/layout";
+    
+    // Widgets
+    
+}
+
+
+
+/* Medium Styles */
+@media (min-width: @breakpoint_medium_min) and (max-width: @breakpoint_medium_max) {
+    
+    // Layout
+    @import "medium/layout";
+    
+    // Widgets
+}
+
+
+
+/* Small Styles */
+@media (max-width: @breakpoint_small_max) {
+
+    // Layout
+    @import "small/layout";
+    
+    // Widgets
+    @import "small/widgets/working-bench";
+    @import "small/widgets/content-wrapper";
+    @import "small/widgets/header-main-navigation";
+    @import "small/widgets/form-editor";
+    @import "small/widgets/expandable";
+    @import "small/widgets/focused-overlay";
+    @import "small/widgets/side-panel";
+    
+    
+    
+}

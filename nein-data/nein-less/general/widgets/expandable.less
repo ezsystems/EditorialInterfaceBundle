@@ -1,0 +1,46 @@
+html.ezp-user-logged-in {
+    > body {
+        .ez-ei-expandable-widget {
+            float:left;
+            width: 64.666%;
+            margin-top:6px;
+            margin-bottom:4px;
+            border-bottom: 1px solid @grey50;
+            box-shadow: 0 4px @grey40;
+            &.expanded{
+                border-bottom: 5px solid @grey40;
+                box-shadow:none;
+                .ez-ei-expandable-header{
+                    .ez-ei-expandable-trigger {
+                        background: url('../nein-img/arrow_small_down.png') no-repeat 2px 12px;
+                    }
+                    &:hover {
+                        .ez-ei-expandable-trigger {
+                            background: url('../nein-img/arrow_small_up.png') no-repeat 2px 12px;
+                        }                        
+                    }
+                }
+            }
+            .ez-ei-expandable-header{
+                display:inline-block;
+                font-weight:bold;
+                .ez-ei-expandable-trigger {
+                    padding:5px 0 0 5px;
+                    background: url('../nein-img/arrow_small_right.png') no-repeat 5px 10px;
+                }
+                &:hover {
+                    .ez-ei-expandable-trigger {
+                        background: url('../nein-img/arrow_small_down.png') no-repeat 2px 12px;
+                    }
+                }
+            }
+            .ez-ei-expandable-content{
+                border-top: 4px solid @grey40;
+                box-shadow: 0 -1px @grey50;
+                padding:5px;
+                margin-top:1px;
+                background: @grey20;
+            }
+        }
+    }
+}

@@ -1,0 +1,102 @@
+html.ezp-user-logged-in {
+    > body {
+        
+        .ez-ei-focused-overlay-background {
+            background: fade(@grey90, 80%) url('../nein-img/diagonal_pattern.png') top left;
+            position: absolute;
+            z-index:50;
+        }
+
+        .ez-ei-focused-overlay-frame {
+            position: absolute;
+            z-index:52;
+            background-color: white;
+        }
+
+        .ez-ei-focused-overlay-frame-3 {
+            box-shadow: inset -1px -1px @grey40, inset -2px -2px @grey10, inset 0 1px @grey10; 
+            border-top: @grey40 1px solid;
+        }
+        .ez-ei-focused-overlay-frame-6 {
+            box-shadow: inset 0 -1px @grey40, inset 0 -2px @grey10; 
+        }
+        .ez-ei-focused-overlay-frame-9 {
+            box-shadow: inset 1px -1px @grey40, inset 2px -2px @grey10, inset 0 1px @grey10; 
+            border-top: @grey40 1px solid;
+        }
+        .ez-ei-focused-overlay-frame-12 {
+            box-shadow: inset 0 1px @grey40, inset 0 2px @grey10; 
+        }
+
+        .ez-ei-focused-overlay-dialog {
+            position: absolute;
+            z-index:53;
+            background: @grey50 url('../nein-img/textile.png') repeat left top;
+        }
+        .ez-ei-focused-overlay-dialog-3 {
+            border-right: @grey70 1px solid;
+            .box-shadow(inset -1px 0 @grey20);
+        }
+        .ez-ei-focused-overlay-dialog-6 {
+            border-left: @grey70 1px solid;
+            border-bottom: @grey70 1px solid;
+            border-right: @grey70 1px solid;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            .box-shadow(inset 0 -1px @grey20);
+        }
+        .ez-ei-focused-overlay-dialog-9 {
+            border-left: @grey70 1px solid;
+            .box-shadow(inset 1px 0 @grey20);
+        }
+
+        .ez-ei-focused-overlay-shadow {
+            position:absolute;
+            z-index:51;
+            .box-shadow(0 0 5px fade(@grey90,50%));
+        }
+        .ez-ei-focused-overlay-shadow-6 {
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        .ez-ei-focused-overlay-shadow-12 {
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        
+
+    #ez-ei-focused-overlay-header {
+        position: absolute;
+        z-index: 52;
+        #gradient > .vertical(@grey10, @grey20);
+        border-top: @grey70 1px solid;
+        border-left: @grey70 1px solid;
+        border-right: @grey70 1px solid;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        box-shadow: inset 0 -1px @grey30;
+        padding: 2px 0 0 5px;
+        min-width: 315px;
+    }
+
+    #ez-ei-focused-overlay-toolbar{
+        border-left: @grey70 1px solid !important;
+        border-right: @grey70 1px solid;
+        box-shadow: inset 0 1px @grey40, inset -1px 0 @grey20, inset 1px 0 @grey20;
+        z-index:54;
+        min-width:320px;
+
+
+        .ez-ei-focused-overlay-buttons{
+            float:right;
+            padding: 10px 5px 10px 0;
+            }
+
+        }
+        
+        
+        
+        
+    
+    }
+}

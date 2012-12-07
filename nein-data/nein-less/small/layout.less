@@ -1,0 +1,121 @@
+.ezp-nein-visible-small {
+    display: inherit !important;
+}
+.ezp-nein-visible-medium {
+    display: none !important;
+}
+.ezp-nein-visible-large {
+    display: none !important;
+}
+.ezp-nein-hidden-small {
+    display: none !important;
+}
+.ezp-nein-hidden-medium {
+    display: inherit !important;
+}
+.ezp-nein-hidden-large {
+    display: inherit !important;
+}
+
+html.ezp-user-logged-in { // by the way, this should be a MUST HAVE start for all selectors used to style NEIn
+    
+    margin-left: 0;
+    margin-right: 0;
+    
+    > body {
+        display: block;
+        position: relative;
+        
+        > .ez-ei-working-bench {
+            
+            > .ez-ei-linear {
+                display: none;
+            }
+            
+        }
+        
+        div.ez-ei-header {
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            
+            > nav {
+                
+                > ul {
+                    
+                    max-width: 80%;
+                    min-width: 256px;
+                    
+                    > li {
+                        
+                        > a.ez-ei-tab {
+                            padding: 0;
+                            text-align: center;
+                            
+                            &[data-icon]:before {
+                                margin: 0;
+                                float: none;
+                                display: inline;
+                            }
+
+                            > span {
+                                display: none;
+                            }
+
+                        }
+                        
+                        &.ez-ei-current {
+                            
+                            > a.ez-ei-tab {
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                > a.ez-ei-logout {
+                    top: 7px;
+                    right: 5px;
+                }
+                
+            }
+            
+            > .ez-ei-controls-bar {
+                display: block;
+                .clearfix;
+                
+                > .ez-ei-view-settings {
+                    display: block;
+                    width: 100%;
+                    background: white url('../nein-img/dark_back.png') repeat left top;
+                    &.ez-ei-fixed {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        z-index: 100;
+                    }
+                    .ez-ei-site-access-selectors {
+                        display: none;
+                    }
+                    .ez-ei-operational-mode-switch {
+                        display: block;
+                        margin-left: 20px;
+                    }
+                }
+                
+                > .ez-ei-versions-controls {
+                    display: block;
+                    width: 100%;
+                    background-color: grey;
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+}

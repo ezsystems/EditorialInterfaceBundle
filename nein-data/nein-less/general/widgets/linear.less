@@ -1,0 +1,37 @@
+html.ezp-user-logged-in {
+    > body {
+        > .ez-ei-working-bench {
+            > .ez-ei-linear { // This must be replaced with JS-generated one (with real numbers)
+                display: block;
+                left: 0;
+                top: 0;
+                height: 20px;
+                margin-top: -20px;
+                margin-left: -3px;
+                background: transparent url('../nein-img/linear.png') no-repeat left bottom;
+                &:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 92px;
+                    height: 92px;
+                    left: -3px;
+                    top: -2px;
+                    background: transparent url('../nein-img/sprite.png') no-repeat 0 0;
+                    z-index: 58;
+                }
+                &:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 92px;
+                    height: 92px;
+                    right: -3px;
+                    top: -2px;
+                    background: transparent url('../nein-img/sprite.png') no-repeat -92px 0;
+                    z-index: 58;
+                }
+            }
+        }
+    }
+}

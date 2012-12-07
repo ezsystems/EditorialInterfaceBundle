@@ -1,0 +1,20 @@
+html.ezp-user-logged-in .ezp-nein,
+html.ezp-user-logged-in .ezp-nein ul,
+html.ezp-user-logged-in .ezp-nein li,
+html.ezp-user-logged-in .ezp-nein a,
+html.ezp-user-logged-in .ezp-nein div {
+  width: auto;
+  height: auto;
+  min-height: 0;
+  min-width: 0;
+  max-height: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  color: black;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  list-style-type: none;
+}

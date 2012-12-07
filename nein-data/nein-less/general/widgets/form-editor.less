@@ -1,0 +1,198 @@
+html.ezp-user-logged-in {
+    > body {
+        
+        .ez-ei-form-editor-wrapper{
+            .box-shadow(0 0 5px fade(@grey90,50%));
+            border-radius: 5px;
+        }        
+        
+        .ez-ei-form-editor-dialog{
+            position: absolute;
+            background: url("../nein-img/textile.png") repeat scroll left top @grey80;
+            border-bottom-left-radius:5px;
+            border-bottom-right-radius:5px;
+            border-bottom: @grey70 1px solid;
+            z-index:53;
+        }
+        
+        .ez-ei-form-editor-dialog-content{
+            float:left;
+            display:block;
+            padding:0 5px 10px 5px;
+            .ez-ei-from-editor-dialog-content-group{
+                float:left;
+                margin-bottom:10px;
+                width:100%; 
+                border:1px solid @grey50;
+                background-color: fade(@grey50, 10%);
+                padding-bottom:9px;
+                &:hover {
+                    background-color: fade(@yellow-something,6%) ;
+                    .ez-ei-form-editor-marker {
+                        background-color:@birch;
+                    }
+                }
+                .ez-ei-form-editor-marker {
+                    background-color:@grey20;
+                    float:right;
+                    cursor:pointer;
+                }
+                .ez-ei-from-editor-dialog-content-module {
+                    padding-top:9px;                    
+                    float:left;
+                    overflow:hidden;
+                    width:95%;
+                    &.short {
+                        width:47.5%;
+                        div.content-input, div.content-label {
+                            float:left;
+                            width:50%;
+                            input {
+                                width:90%;
+                            }
+                        }
+                    }
+                    div.content-input {
+                        float:left;
+                        width:75%;
+                        &.plug{
+                            padding-top: 5px;
+                        }
+                        input, textarea {
+                            margin:0;
+                            float:left;
+                            width:96.666%;
+                            border:1px solid @grey50;
+                            display:block;
+                            border-radius:0px;
+                            .box-shadow(none);
+                            background-color:@grey10;
+                            &:focus {
+                                background-color:@white;
+                            }
+                            &:disabled {
+                                color:@grey50;
+                                background: @grey10 url('../nein-img/diagonal_pattern.png') top left;
+                            }
+                            &.image-file-select{
+                                float:left;
+                                width:100%;
+                            }
+                        }
+                        .image-file-select-wrapper {
+                            float:left;
+                            width:64.666%;
+                            height:30px;
+                            overflow:hidden;
+                        }
+                        .image-file-select-button{
+                            float:right;
+                            position:relative;
+                            height:21px;
+                            left:-2px;
+                            top:-28px;
+                            #gradient > .vertical(@grey10, @grey20);
+                            border: 1px solid @grey40;
+                            border-radius:5px;
+                            padding:0 5px 2px 5px;
+                            font-size:13px;
+                            line-height:22px;
+                            cursor:pointer;
+                            span {
+                                height:18px;
+                                font-size:18px;
+                                line-height:14px;
+                                padding-right:5px;
+                                position:relative;
+                                top:3px;
+                            }
+                            &:hover {
+                                #gradient > .vertical(@grey20, @grey10);
+                            }
+                            
+                        }
+                        textarea {
+                            height:170px;
+                        }
+                        img {
+                            float:left;
+                            margin:0;
+                            width:31%;
+                            padding-right:10px;
+                        }
+                        
+                        
+                    }
+                    div.content-label {
+                        float:left;
+                        width:25%;
+                        label {
+                            float:right;
+                            display:block;
+                            width:100%;
+                            text-align:right;
+                            color:@grey90;
+                            padding:5px 10px 0 0;
+                            &.disabled {
+                                color:@grey50;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        #ez-ei-form-editor-top-navigation{
+            position:absolute;
+            span {
+                float:left;
+                color: @grey40;
+                font-size: 20px;
+                line-height: 18px;
+                padding: 0 3px 0 0;
+                text-shadow: -1px -1px 1px @grey90;
+            }
+            a {
+                float:left;
+                color:@grey40;
+                text-shadow: -1px -1px 1px @grey90;
+                display:block;
+                border-bottom: 2px solid @grey70;
+                line-height: 14px;
+                font-size:12px;
+                .box-shadow(inset 0 -1px 0 0 @grey80);
+
+                &:hover {
+                    text-decoration:none;
+                    border-bottom: none;
+                    .box-shadow(none);
+                    color:@birch;
+                }
+            }
+        }
+
+    #ez-ei-form-editor-header {
+        z-index:52;
+        #gradient > .vertical(@grey10, @grey20);
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        box-shadow: inset 0 -1px @grey30;
+        padding: 2px 0 0 5px;
+        min-width: 355px;
+
+    }
+
+    #ez-ei-form-editor-toolbar {
+        min-width:360px;
+        position:relative;
+        .clearfix();
+        border:none;
+
+        .ez-ei-form-editor-buttons {
+            float:right;
+            padding: 10px 5px 10px 0;
+            }
+
+        }
+    }
+}

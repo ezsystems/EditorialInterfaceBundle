@@ -1,0 +1,68 @@
+html.ezp-user-logged-in { // by the way, this should be a MUST HAVE start for all selectors used to style NEIn
+    display: block;
+    margin: 70px 30px 0 30px;
+
+    > body {
+        display: block;
+        position: relative;
+        background: white url('../nein-img/dark_back.png') repeat left top;
+        
+
+        > .ez-ei-working-bench {
+
+            > .ez-ei-content-wrapper { // IMPORTANT: must be generated dynamically, based on initial BODY styles
+                
+                > .ez-ei-content-inner-wrapper {
+                        
+                }    
+            }
+        }
+
+        div.ez-ei-header {
+            position: fixed;
+            display: block;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            z-index: 100; // #todo: check z-index in original site on load and provide a higher index for NEIn components
+            font-size: 16px;
+            font-family: @baseFontFamily;
+            background: white url('../nein-img/dark_back.png') repeat left top;
+
+            
+            
+            .ez-ei-device-selector {
+                display: block;
+                float: left;
+                padding: 10px 15px 0 0;
+            }
+            
+            .ez-ei-switch-container {
+                display: block;
+                float: left;
+            }
+            
+            .ez-ei-operational-mode-switch {
+                display: block;
+                min-width:160px;
+                float:left;
+                
+                &.ez-ei-fixed {
+                    overflow:hidden;
+                    width:100%;
+                    position:fixed;
+                    left:0;
+                    top:0;
+                    background: white url('../nein-img/dark_back.png') repeat left top;
+                }
+            }
+            
+
+        }
+
+
+        
+       
+        
+    }
+}
