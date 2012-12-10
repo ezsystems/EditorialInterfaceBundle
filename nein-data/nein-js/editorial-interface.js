@@ -256,13 +256,22 @@ YUI.add('ez-editorial-interface', function (Y) {
         },
 
         bindUI: function () {
+            var that = this;
             this._deviceSelector.on('updateTrigger', function (e) {
                 var n = this.get('selectedValueNode'),
-                    selected = this.get('selected');
+                    selected = this.get('selected'),
+                    selectedValue = selected.getAttribute('data-value');
                 if ( Lang.isObject(n) && Lang.isObject(selected) ) {
                     e.preventDefault();
-                    n.setAttribute('data-icon', selected.getAttribute('data-value'));
+                    n.setAttribute('data-icon', selectedValue);
                 }
+
+                // Capital letter "O"
+                if (selectedValue != 'O'){
+                    that._notImplementedLinkClick(e);
+                }
+
+//                this._notImplementedLinkClick(null);
             });
 
             var that = this;
@@ -290,6 +299,7 @@ YUI.add('ez-editorial-interface', function (Y) {
             });
 
             Y.one('.ez-ei-header').delegate('click', this._logoutLinkClick, '.ez-ei-logout',this);
+            Y.one('.ez-ei-header-main-navigation').delegate('click', this._notImplementedLinkClick, 'ul li:not([class]) a');
 
             Y.on('windowresize', Y.bind('_prepareFeatures', this));
             
@@ -339,7 +349,6 @@ YUI.add('ez-editorial-interface', function (Y) {
                         value: '30px'
                     }
                 }, function(){
-                    Y.log('ttttrrrr');
                     that._setContentWrapper();
                 }
             );
@@ -557,6 +566,7 @@ YUI.add('ez-editorial-interface', function (Y) {
          */
 
         _logoutLinkClick: function (e) {
+            e.preventDefault();
 
             // Restoring HTML styles
             Y.one('html.ezp-user-logged-in').transition({
@@ -586,6 +596,11 @@ YUI.add('ez-editorial-interface', function (Y) {
 
             // Erasing the content wrappers
             this.workingBench.remove(true);
+        },
+
+        _notImplementedLinkClick: function (e) {
+            e.preventDefault();
+            alert('Not implemented yet!');
         },
 
         /********************

@@ -298,10 +298,10 @@ YUI.add('ez-focused-overlay', function (Y) {
             Y.one('.ez-ei-focused-overlay-button-edit').setAttribute('rel', focusedNode.getAttribute('id'));
 
             // Neccessary vars
-            var focusedX = parseInt(focusedNode.getX(),10) + parseInt(focusedNode.getComputedStyle('paddingLeft'),10),
-                focusedY = parseInt(focusedNode.getY(),10) + parseInt(focusedNode.getComputedStyle('paddingTop'),10),
-                focusedWidth = parseInt(focusedNode.getComputedStyle('width'),10) + 2, // adding 2 px for targeting overlay's border
-                focusedHeight = parseInt(focusedNode.getComputedStyle('height'),10),
+            var focusedX = parseInt(focusedNode.getX(),10),
+                focusedY = parseInt(focusedNode.getY(),10),
+                focusedWidth = focusedNode.get('offsetWidth') + 2, // adding 2 px for targeting overlay's border
+                focusedHeight = focusedNode.get('offsetHeight'),
 
                 frameDefaultWidth = this.get('frameDefaultWidth'),
                 frameCountedWidth = frameDefaultWidth,
