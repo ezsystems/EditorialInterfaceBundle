@@ -7,7 +7,7 @@ services:
 
     editorial_interface.twig.extension.content:
         class: %editorial_interface.twig.extension.content.class%
-        arguments: [@service_container, @ezpublish.api.repository, @ezpublish.config.resolver, %editorial_interface.data_prefix%]
+        arguments: [@service_container, @ezpublish.api.repository, @ezpublish.config.resolver, %editorial_interface.data_attribute_prefix%]
         tags:
             - {name: twig.extension}
 
