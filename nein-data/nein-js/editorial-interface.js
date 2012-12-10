@@ -599,7 +599,10 @@ YUI.add('ez-editorial-interface', function (Y) {
         },
 
         _notImplementedLinkClick: function (e) {
-            e.preventDefault();
+            if (e) {
+                e.preventDefault();
+            }
+
             alert('Not implemented yet!');
         },
 
@@ -645,16 +648,22 @@ YUI.add('ez-editorial-interface', function (Y) {
         },
 
         _dispatchFocusedOverlayOnCreate: function (e) {
+            var that = this;
             this._FOlanguageDropdown = this._getInstance('FOlanguageDropdown');
             this._FOversionDropdown = this._getInstance('FOversionDropdown');
             this._FOlanguageDropdown.render();
             this._FOversionDropdown.render();
-              
+
             this._FOlanguageDropdown.on('change', function (e) {
                 console.log(
                     'FO Language selector change from', e.prevVal.getContent(),
                     'to', e.newVal.getContent()
                 );
+                that._notImplementedLinkClick(null);
+            });
+
+            this._FOversionDropdown.on('change', function (e) {
+                that._notImplementedLinkClick(null);
             });
               
         },

@@ -256,6 +256,7 @@ YUI.add('ez-focused-overlay', function (Y) {
             });
             
             dialogToolBarNode.delegate('click', this._editLinkClick, '.ez-ei-focused-overlay-button-edit');
+            dialogToolBarNode.delegate('click', this._breadcrumbsCloseClickCallback, '.ez-ei-focused-overlay-button-discard,.ez-ei-focused-overlay-button-publish');
             
             Y.fire('focusedOverlay:onCreate');
 

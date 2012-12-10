@@ -10,7 +10,6 @@
     <link href="css/responsive.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/beaker.png">
 
-    <script type="text/javascript" src="nein-data/nein-js/tiny_mce/tiny_mce.js"></script>
     <script src="http://yui.yahooapis.com/3.7.3/build/yui/yui-min.js"></script>
     <!--<script src="build/yui/yui-min.js"></script>-->
     <script>
@@ -63,7 +62,7 @@
             'ez-form-editor': {
                 name: 'ez-form-editor',
                 fullpath: 'nein-data/nein-js/minified/form-editor.js',
-                requires: ['widget','node']
+                requires: ['widget','node','tinymce']
 
             },
             'ez-side-panel': {
@@ -92,6 +91,10 @@
                 name: 'ez-progress-bar',
                 fullpath: 'nein-data/nein-js/minified/progress-bar.js',
                 requires: ['widget','node']
+            },
+            'tinymce': {
+                name: 'tinymce',
+                fullpath: 'nein-data/nein-js/tiny_mce/tiny_mce.js'
             }
 
 
@@ -140,20 +143,6 @@
         });
     });
     </script>
-    <script>
-        tinyMCE.init({
-            theme : "advanced",
-            theme_advanced_toolbar_location : "top",
-            
-            theme_advanced_buttons1 : "bold,italic,underline, strikethrough, separator,justifyleft, justifycenter,justifyright,  justifyfull, separatorbullist,numlist,separator,outdent,indent,separator,undo,redo,separator,link,unlink,anchor,image,cleanup,separator,help,code,separator,sub,sup",
-                        
-            theme_advanced_buttons2: "",
-            theme_advanced_buttons3: "",
-            theme_advanced_buttons4: "",
-            
-            mode : "none"
-        });
-    </script>
   </head>
     <body class="ez-ei-viewing-and-editing">
 
@@ -166,7 +155,7 @@
                             <li class="french"><a href="#"><span class="hidden">Françe</span></a></li>
                             <li class="german"><a href="#"><span class="hidden">Deutsch</span></a></li>
                         </ul>
-                        <ul class="nav" id="ez-ei-editable-region-18" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Top links"data-ez-field-type-identifier="ezselection">
+                        <ul class="nav" id="ez-ei-editable-region-18" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Top links" data-ez-field-type-identifier="ezselection">
                             <li>
                                 <a href="http://www.icloud.com">Tag Cloud</a>
                             </li>
@@ -222,7 +211,7 @@
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">Navigation</a>
                     
                     <div class="nav-collapse">
-                        <ul class="nav" id="ez-ei-editable-region-22" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Navigation menu"data-ez-field-type-identifier="ezselection">
+                        <ul class="nav" id="ez-ei-editable-region-22" data-ez-editable-region="true" data-ez-editable-region-level="1" data-ez-field-identifier="Navigation menu" data-ez-field-type-identifier="ezselection">
                             <li class="active">
                                 <a href="#">Home</a>
                             </li>
