@@ -3,14 +3,14 @@
 $result = array();
 $result['success'] = false;
 
-$upload_path = dirname(__FILE__) . '\\uploads\\';
+$upload_path = dirname(__FILE__) . '/uploads/';
 
 // detecting direct file transfer
 // TODO: control overwrite
 $file_name = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
 if ($file_name) {
     if ( file_put_contents(
-        $upload_path . $fileName,
+        $upload_path . $file_name,
         file_get_contents('php://input')
         )){
         $result['success'] = true;
