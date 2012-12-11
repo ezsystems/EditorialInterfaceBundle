@@ -44,7 +44,7 @@ YUI.add('ez-files-list', function (Y) {
 
             this.sourceNode = this.get("srcNode");
 
-            this.update();
+//            this.update();
         },
 
         destructor: function () {
