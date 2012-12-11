@@ -84,17 +84,6 @@ YUI.add('ez-form-editor', function (Y) {
             formTextareaFieldTemplate   = Y.Handlebars.compile(Y.one('#ezp-nein-form-textarea-field').getHTML());
             formPlugFieldTemplate       = Y.Handlebars.compile(Y.one('#ezp-nein-form-plug-field').getHTML());
 
-            tinyMCE.init({
-                theme : "advanced",
-                theme_advanced_toolbar_location : "top",
-
-                theme_advanced_buttons1 : "bold,italic,underline, strikethrough, separator,justifyleft, justifycenter,justifyright,  justifyfull, separatorbullist,numlist,separator,outdent,indent,separator,undo,redo,separator,link,unlink,anchor,image,cleanup,separator,help,code,separator,sub,sup",
-                theme_advanced_buttons2: "",
-                theme_advanced_buttons3: "",
-                theme_advanced_buttons4: "",
-
-                mode : "none"
-            });
         },
 
         destructor: function () {
