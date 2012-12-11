@@ -510,9 +510,6 @@ YUI.add('ez-assets-manager', function (Y) {
             }
         }
 
-
-
-
     });
 
     Y.eZ.AssetsManager = eZAssetsManager;

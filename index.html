@@ -82,6 +82,11 @@
                 fullpath: 'nein-data/nein-js/minified/structure-inspector.js',
                 requires: ['widget','node']
             },
+            'ez-files-list': {
+                name: 'ez-files-list',
+                fullpath: 'nein-data/nein-js/minified/files-list.js',
+                requires: ['widget','node']
+            },
             'ez-assets-manager': {
                 name: 'ez-assets-manager',
                 fullpath: 'nein-data/nein-js/minified/assets-manager.js',
@@ -96,10 +101,6 @@
                 name: 'tinymce',
                 fullpath: 'nein-data/nein-js/tiny_mce/tiny_mce.js'
             }
-
-
-            
-
         }
     };
     YUI().use('event', 'ez-editorial-interface', function (Y) {
@@ -725,8 +726,11 @@
         <script id="ezp-nein-right-aside" type="text/x-handlebars-template">
             <div class="ezp-nein ez-ei-side-panel" id="ez-ei-side-panel-right">
                 <div class="ez-ei-side-panel-trigger"></div>
-                <div  class="ez-ei-side-panel-content">
-                    <div id="ez-ei-media-library"></div>
+                <div class="ez-ei-media-view-options">
+                    View options
+                </div>
+                <div class="ez-ei-side-panel-content">
+                    <div id="ez-ei-files-list"></div>
                 </div>
                 <div id="ez-ei-media-uploader" >
                     <div class="ez-ei-uploading-old-style-workflow">
@@ -923,6 +927,9 @@
                 <div class="ez-ei-media-progress-bar-frame"></div>
             </div>
         </script>
+
+
+
 
         <!-- Template mummies mausoleum end-->
         
