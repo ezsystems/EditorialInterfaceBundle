@@ -1,3 +1,6 @@
+//TODO: centralize dialog buttons
+//TODO: file name while uploading
+//TODO: continous progress bar mode
 YUI.add('ez-assets-manager', function (Y) {
     "use strict";
 

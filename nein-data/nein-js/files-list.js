@@ -39,10 +39,12 @@ YUI.add('ez-files-list', function (Y) {
 
         initializer: function () {
 
-//            var singleFileTemplateSource = Y.one('#ezp-nein-single-file').getHTML();
-//            this.singleFileTemplate = Y.Handlebars.compile(singleFileTemplateSource);
+            var singleFileTemplateSource = Y.one('#ezp-nein-single-file').getHTML();
+            this.singleFileTemplate = Y.Handlebars.compile(singleFileTemplateSource);
 
             this.sourceNode = this.get("srcNode");
+
+            this.update();
         },
 
         destructor: function () {
@@ -58,16 +60,30 @@ YUI.add('ez-files-list', function (Y) {
         },
 
         update: function (focusedNode) {
-
-            this.sourcNode.empty();
-            this.sourceNode.append("Files List!");
-
+            this._syncNodes();
         },
 
         _syncNodes: function () {
 
-            var cssPrefix = eZFilesList.CSS_PREFIX;
+            var cssPrefix = eZFilesList.CSS_PREFIX,
+                that = this;
 
+            this.sourceNode.empty();
+
+            Y.io('/nein-data/files.php', {
+                method: 'GET',
+                on: {
+                    success: function (id, result) {
+                        var json = Y.JSON.parse(result.responseText);
+                        Y.Array.each(json.files, function (file) {
+                            that.sourceNode.append(that.singleFileTemplate({
+                                type: file.type,
+                                name: file.name
+                            }));
+                        });
+                    }
+                }
+            });
         },
 
         /// EVENTS

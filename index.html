@@ -28,7 +28,7 @@
                     'event', 'node-screen', 'node-style', 'widget', 'selector-css3','handlebars', 'json',
                     'transition', 'dd', 'array-extras', 'stylesheet', 'ez-switches', 'ez-dropdown',
                     'ez-overlay','ez-focused-overlay','ez-form-editor','ez-expandable', 'ez-progress-bar',
-                    'ez-side-panel','ez-breadcrumbs', 'ez-structure-inspector', 'ez-assets-manager'
+                    'ez-side-panel','ez-breadcrumbs', 'ez-structure-inspector', 'ez-assets-manager', 'ez-files-list'
                 ]
             },
             'ez-switches': {
@@ -85,7 +85,7 @@
             'ez-files-list': {
                 name: 'ez-files-list',
                 fullpath: 'nein-data/nein-js/minified/files-list.js',
-                requires: ['widget','node']
+                requires: ['widget','node','io']
             },
             'ez-assets-manager': {
                 name: 'ez-assets-manager',
@@ -942,6 +942,11 @@
             </div>
         </script>
 
+        <script id="ezp-nein-single-file" type="text/x-handlebars-template">
+            <div class="ez-ei-single-file">
+                {{name}}
+            </div>
+        </script>
 
 
 
