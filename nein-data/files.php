@@ -1,5 +1,7 @@
 <?php
 
+//TODO: of course, make resized copies of recieved images to use them as thumbs
+
 $result = array();
 $result['success'] = false;
 

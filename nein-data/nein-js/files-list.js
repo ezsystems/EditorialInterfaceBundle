@@ -39,12 +39,14 @@ YUI.add('ez-files-list', function (Y) {
 
         initializer: function () {
 
-            var singleFileTemplateSource = Y.one('#ezp-nein-single-file').getHTML();
+            var singleFileTemplateSource = Y.one('#ezp-nein-single-file').getHTML(),
+                singleImageFileTemplateSource = Y.one('#ezp-nein-single-image-file').getHTML();
             this.singleFileTemplate = Y.Handlebars.compile(singleFileTemplateSource);
+            this.singleImageFileTemplate = Y.Handlebars.compile(singleImageFileTemplateSource);
 
             this.sourceNode = this.get("srcNode");
 
-//            this.update();
+            this.update();
         },
 
         destructor: function () {
@@ -76,10 +78,25 @@ YUI.add('ez-files-list', function (Y) {
                     success: function (id, result) {
                         var json = Y.JSON.parse(result.responseText);
                         Y.Array.each(json.files, function (file) {
-                            that.sourceNode.append(that.singleFileTemplate({
-                                type: file.type,
-                                name: file.name
-                            }));
+
+                            var singleFileNode;
+
+                            switch (file.type){
+                                case 'image':
+                                    singleFileNode = that.singleImageFileTemplate({
+                                        name: file.name,
+                                        src: '/nein-data/uploads/' + file.name
+                                    });
+                                    break;
+                                default :
+                                    singleFileNode = that.singleFileTemplate({
+                                        name: file.name
+                                    });
+                                    //TODO: add custom class for every supported file type.
+                                    break;
+                            }
+
+                            that.sourceNode.append(singleFileNode);
                         });
                     }
                 }
