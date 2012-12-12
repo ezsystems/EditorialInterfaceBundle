@@ -258,7 +258,15 @@ YUI.add('ez-editorial-interface', function (Y) {
 
             this._structureInspector = this._getInstance('structureInspector');
 
-            this._filesList = this._getInstance('filesList');
+            // features detection
+            if(window.location.host.indexOf("proto") !== -1){
+                this._filesList = new Y.eZ.FilesList({
+                    phpDisabled: true
+                });
+            } else {
+                this._filesList = this._getInstance('filesList');
+            }
+
             this._assetsManager = this._getInstance('assetsManager');
 
             this._prepareFeatures();

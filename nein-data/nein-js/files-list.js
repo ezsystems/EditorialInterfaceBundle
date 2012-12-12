@@ -29,7 +29,9 @@ YUI.add('ez-files-list', function (Y) {
     eZFilesList.CSS_PREFIX = "ez-ei";
 
     eZFilesList.ATTRS = {
-
+        phpDisabled: {
+            value : false
+        }
     };
 
     eZFilesList.HTML_PARSER = {
@@ -45,6 +47,7 @@ YUI.add('ez-files-list', function (Y) {
             this.singleImageFileTemplate = Y.Handlebars.compile(singleImageFileTemplateSource);
 
             this.sourceNode = this.get("srcNode");
+            this.phpDisabled = this.get("phpDisabled");
 
             this.update();
         },
@@ -71,6 +74,10 @@ YUI.add('ez-files-list', function (Y) {
                 that = this;
 
             this.sourceNode.empty();
+
+            if (this.phpDisabled){
+                return false;
+            }
 
             Y.io('/nein-data/files.php', {
                 method: 'GET',
