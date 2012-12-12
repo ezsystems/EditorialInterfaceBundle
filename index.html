@@ -741,7 +741,20 @@
             <div class="ezp-nein ez-ei-side-panel" id="ez-ei-side-panel-right">
                 <div class="ez-ei-side-panel-trigger"></div>
                 <div class="ez-ei-media-view-options">
-                    View options
+                    <div class="ez-ei-media-view-options-wrapper">
+                        <div id="ez-ei-media-view-type-selector" class="ez-ei-free-drop-down white ez-ei-compact">
+                            <a href="#" class="ez-ei-dropdown-trigger" title="Switching between media view types. Currently - ...">
+                                <span class="ez-ei-marker ez-ei-text ez-ei-dropdown-selected-value">Used on this page</span>
+                                <span data-icon="&#xe01d;" class="ez-ei-arrow"></span>
+                            </a>
+                            <div class="ez-ei-dropdown-options">
+                                <h2>SELECT VIEW</h2>
+                                <div class="ez-ei-dropdown-option" data-value="Everything">Everything</div>
+                                <div class="ez-ei-dropdown-option ez-ei-dropdown-selected" data-value="Used on this page">Used on this page</div>
+                                <div class="ez-ei-dropdown-option" data-value="Uploaded today">Uploaded today</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="ez-ei-side-panel-content">
                     <div id="ez-ei-files-list"></div>
@@ -944,7 +957,9 @@
 
         <script id="ezp-nein-single-file" type="text/x-handlebars-template">
             <div class="ez-ei-single-file">
-                {{name}}
+                <div class="file-wrapper">
+                    {{name}}
+                </div>
             </div>
         </script>
 

@@ -128,6 +128,9 @@ YUI.add('ez-dropdown', function (Y) {
 
     Y.extend(eZDD, Y.Widget, {
         initializer: function () {
+
+            Y.log(this.get('trigger'));
+
             this.publish(EVT_UPDATE_TRIGGER, {
                 broadcast: false,
                 emitFacade: true,
@@ -172,6 +175,7 @@ YUI.add('ez-dropdown', function (Y) {
          * @method toggle
          */
         toggle: function () {
+            Y.log('toggle');
             this.set('open', !this.get('open'));
         },
 

@@ -70,6 +70,11 @@ YUI.add('ez-assets-manager', function (Y) {
             });
             this.progressBarNode = Y.one(".ez-ei-media-progress-bar-background");
 
+            this._viewTypeSelector = new Y.eZ.Dropdown({
+                srcNode: "#ez-ei-media-view-type-selector"
+            });
+
+
             // determining if browser supports fileAPI. Allowing drag-n-drop in that case
             // TODO: make more precise determination (fileAPI vs. Drag-n-drop)
             // Or may be let it be that way, since for modern browsers it's irrelevant.

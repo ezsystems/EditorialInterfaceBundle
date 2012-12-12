@@ -248,6 +248,7 @@ YUI.add('ez-editorial-interface', function (Y) {
             this._operationSwitcher = this._getInstance('operationSwitcher');
 
             this._deviceSelector = this._getInstance('deviceDropdown');
+
             this._targetingOverlay = this._getInstance('targetingOverlay');
 
             this._focusedOverlay = this._getInstance('focusedOverlay');
@@ -259,7 +260,7 @@ YUI.add('ez-editorial-interface', function (Y) {
             this._structureInspector = this._getInstance('structureInspector');
 
             // features detection
-            if(window.location.host.indexOf("proto") !== -1){
+            if(window.location.host.indexOf("github.com") !== -1){
                 this._filesList = new Y.eZ.FilesList({
                     phpDisabled: true
                 });
