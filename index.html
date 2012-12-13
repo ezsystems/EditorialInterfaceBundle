@@ -740,22 +740,37 @@
         <script id="ezp-nein-right-aside" type="text/x-handlebars-template">
             <div class="ezp-nein ez-ei-side-panel" id="ez-ei-side-panel-right">
                 <div class="ez-ei-side-panel-trigger"></div>
+
                 <div class="ez-ei-media-view-options">
-                    <div class="ez-ei-media-view-options-wrapper">
-                        <div id="ez-ei-media-view-type-selector" class="ez-ei-free-drop-down white ez-ei-compact">
-                            <a href="#" class="ez-ei-dropdown-trigger" title="Switching between media view types. Currently - ...">
-                                <span class="ez-ei-marker ez-ei-text ez-ei-dropdown-selected-value">Used on this page</span>
-                                <span data-icon="&#xe01d;" class="ez-ei-arrow"></span>
-                            </a>
-                            <div class="ez-ei-dropdown-options">
-                                <h2>SELECT VIEW</h2>
-                                <div class="ez-ei-dropdown-option" data-value="Everything">Everything</div>
-                                <div class="ez-ei-dropdown-option ez-ei-dropdown-selected" data-value="Used on this page">Used on this page</div>
-                                <div class="ez-ei-dropdown-option" data-value="Uploaded today">Uploaded today</div>
-                            </div>
+                    <div id="ez-ei-media-view-type-selector" class="ez-ei-free-drop-down white ez-ei-compact">
+                        <a href="#" class="ez-ei-dropdown-trigger" title="Switching between media view types. Currently - ...">
+                            <span class="ez-ei-marker ez-ei-text ez-ei-dropdown-selected-value">Everything</span>
+                            <span data-icon="&#xe01d;" class="ez-ei-arrow"></span>
+                        </a>
+                        <div class="ez-ei-dropdown-options">
+                            <h2>SELECT VIEW</h2>
+                            <div class="ez-ei-dropdown-option ez-ei-dropdown-selected" data-value="Everything">Everything</div>
+                            <div class="ez-ei-dropdown-option" data-value="Used on this page">Used on this page</div>
+                            <div class="ez-ei-dropdown-option" data-value="Uploaded today">Uploaded today</div>
+                        </div>
+                    </div>
+
+                    <div class="ez-ei-media-view-mode-switch ez-ei-double-switch">
+                        <div>
+                            <label for="media-view-mode-tiles">
+                                <span data-icon="&#xe05f;"></span>
+                            </label>
+                            <input type="radio" name="media-view-mode" id="media-view-mode-tiles" value="view" checked="checked" />
+                        </div>
+                        <div>
+                            <label for="media-view-mode-table">
+                                <span data-icon="&#x0035;"></span>
+                            </label>
+                            <input type="radio" name="media-view-mode" id="media-view-mode-table" value="edit" />
                         </div>
                     </div>
                 </div>
+
                 <div class="ez-ei-side-panel-content">
                     <div id="ez-ei-files-list"></div>
                 </div>

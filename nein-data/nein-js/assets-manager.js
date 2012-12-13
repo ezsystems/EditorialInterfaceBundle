@@ -73,6 +73,28 @@ YUI.add('ez-assets-manager', function (Y) {
             this._viewTypeSelector = new Y.eZ.Dropdown({
                 srcNode: "#ez-ei-media-view-type-selector"
             });
+            this._viewTypeSelector.render();
+
+            this._viewModeSwitch = new Y.eZ.Switches({
+                srcNode: ".ez-ei-media-view-mode-switch"
+            });
+            this._viewModeSwitch.render();
+            this._viewModeSwitch.on('switch', function (e){
+                Y.log();
+            });
+
+            // php features detection
+            if(window.location.host.indexOf("github.com") !== -1){
+                this._filesListWidget = new Y.eZ.FilesList({
+                    srcNode: '#ez-ei-files-list',
+                    phpDisabled: true
+                });
+            } else {
+                this._filesListWidget = new Y.eZ.FilesList({
+                    srcNode: '#ez-ei-files-list'
+                });
+            }
+
 
 
             // determining if browser supports fileAPI. Allowing drag-n-drop in that case
@@ -477,6 +499,7 @@ YUI.add('ez-assets-manager', function (Y) {
             this.progressNumFilesLeft.setHTML(numFilesLeft);
 
             this._removeFileFromList(this.filesList.length - 1,  this._uploadNextFileFromList.bind(this));
+            this._filesListWidget.update();
         },
 
         _fileSelected: function (e){

@@ -157,14 +157,7 @@ YUI.add('ez-editorial-interface', function (Y) {
                     config: {
                         srcNode: '#ez-ei-side-panel-right'
                     }
-                },
-                filesList: {
-                    constructor:Y.eZ.FilesList,
-                    config: {
-                        srcNode: '#ez-ei-files-list'
-                    }
                 }
-
             },
             setter: function (val) {
                 return Y.merge(eZEI.ATTRS.dependencies.value, val);
@@ -258,15 +251,6 @@ YUI.add('ez-editorial-interface', function (Y) {
             this._rightSidePanel = this._getInstance('rightSidePanel');
 
             this._structureInspector = this._getInstance('structureInspector');
-
-            // features detection
-            if(window.location.host.indexOf("github.com") !== -1){
-                this._filesList = new Y.eZ.FilesList({
-                    phpDisabled: true
-                });
-            } else {
-                this._filesList = this._getInstance('filesList');
-            }
 
             this._assetsManager = this._getInstance('assetsManager');
 
