@@ -31,6 +31,9 @@ YUI.add('ez-files-list', function (Y) {
     eZFilesList.ATTRS = {
         phpDisabled: {
             value : false
+        },
+        mode: {
+            value : "tiles"
         }
     };
 
@@ -41,10 +44,14 @@ YUI.add('ez-files-list', function (Y) {
 
         initializer: function () {
 
+            this.mode = this.get("mode");
+
             var singleFileTemplateSource = Y.one('#ezp-nein-single-file').getHTML(),
-                singleImageFileTemplateSource = Y.one('#ezp-nein-single-image-file').getHTML();
+                singleImageFileTemplateSource = Y.one('#ezp-nein-single-image-file').getHTML(),
+                singleStringTemplateSource = Y.one('#ezp-nein-single-string').getHTML();
             this.singleFileTemplate = Y.Handlebars.compile(singleFileTemplateSource);
             this.singleImageFileTemplate = Y.Handlebars.compile(singleImageFileTemplateSource);
+            this.singleStringTemplate = Y.Handlebars.compile(singleStringTemplateSource);
 
             this.sourceNode = this.get("srcNode");
             this.phpDisabled = this.get("phpDisabled");
@@ -68,6 +75,11 @@ YUI.add('ez-files-list', function (Y) {
             this._syncNodes();
         },
 
+        switchMode: function (newMode){
+            this.mode = newMode;
+            this.update();
+        },
+
         _syncNodes: function () {
 
             var cssPrefix = eZFilesList.CSS_PREFIX,
@@ -83,27 +95,42 @@ YUI.add('ez-files-list', function (Y) {
                 method: 'GET',
                 on: {
                     success: function (id, result) {
-                        var json = Y.JSON.parse(result.responseText);
+                        var json = Y.JSON.parse(result.responseText),
+                            stringOddity = 'odd';
                         Y.Array.each(json.files, function (file) {
 
                             var singleFileNode;
 
-                            switch (file.type){
-                                case 'image':
-                                    singleFileNode = that.singleImageFileTemplate({
+                            switch (that.mode){
+                                case 'tiles':
+                                    switch (file.type){
+                                        case 'image':
+                                            singleFileNode = that.singleImageFileTemplate({
+                                                name: file.name,
+                                                src: '/nein-data/uploads/' + file.name
+                                            });
+                                            break;
+                                        default :
+                                            singleFileNode = that.singleFileTemplate({
+                                                name: file.name
+                                            });
+                                            //TODO: add custom class for every supported file type.
+                                            break;
+                                    }
+                                    break;
+
+                                case 'table':
+                                    singleFileNode = that.singleStringTemplate({
                                         name: file.name,
-                                        src: '/nein-data/uploads/' + file.name
+                                        class: stringOddity
                                     });
                                     break;
-                                default :
-                                    singleFileNode = that.singleFileTemplate({
-                                        name: file.name
-                                    });
-                                    //TODO: add custom class for every supported file type.
-                                    break;
+
                             }
 
                             that.sourceNode.append(singleFileNode);
+                            stringOddity = stringOddity == 'odd' ? 'even' : 'odd';
+
                         });
                     }
                 }

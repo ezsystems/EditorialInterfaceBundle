@@ -1,19 +1,19 @@
 html.ezp-user-logged-in {
     > body {
         #ez-ei-files-list{
-            padding: 5px 0 0 5px;
+            padding: 5px 5px 0 5px;
             .ez-ei-single-file{
                 float:left;
                 width: 90px;
                 height: 90px;
-                background-color: @grey20;
+                background-color: @grey10;
                 margin: 0 5px 5px 0;
                 padding: 5px;
                 text-align:center;
                 overflow: hidden;
                 font-size: 10px;
                 &:hover{
-                    background-color: @grey30;
+                    background-color: @birch;
                 }
                 .file-wrapper{
                     display: table-cell;
@@ -24,6 +24,18 @@ html.ezp-user-logged-in {
                         max-width: 90px;
                         max-height: 90px;
                     }
+                }
+            }
+            .ez-ei-single-string{
+                padding: 3px;
+                font-size: 12px;
+                background-color: @grey10;
+                color: @blue-grey;
+                &.even{
+                    background-color: @grey20;
+                }
+                &:hover{
+                    background-color: @birch;
                 }
             }
         }

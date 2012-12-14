@@ -41,6 +41,8 @@ YUI.add('ez-assets-manager', function (Y) {
 
         initializer: function () {
 
+            var that = this;
+
             this.sourceNode = this.get("srcNode");
             this.uploaderNode = Y.one("#ez-ei-media-uploader");
             this.dropAreaNode = Y.one(".ez-ei-media-drop-area");
@@ -75,15 +77,7 @@ YUI.add('ez-assets-manager', function (Y) {
             });
             this._viewTypeSelector.render();
 
-            this._viewModeSwitch = new Y.eZ.Switches({
-                srcNode: ".ez-ei-media-view-mode-switch"
-            });
-            this._viewModeSwitch.render();
-            this._viewModeSwitch.on('switch', function (e){
-                Y.log();
-            });
-
-            // php features detection
+            // php features detection and activation Files List Widget
             if(window.location.host.indexOf("github.com") !== -1){
                 this._filesListWidget = new Y.eZ.FilesList({
                     srcNode: '#ez-ei-files-list',
@@ -95,7 +89,11 @@ YUI.add('ez-assets-manager', function (Y) {
                 });
             }
 
-
+            // View Mode Switch
+            this._viewModeSwitch = new Y.eZ.Switches({
+                srcNode: ".ez-ei-media-view-mode-switch"
+            });
+            this._viewModeSwitch.render();
 
             // determining if browser supports fileAPI. Allowing drag-n-drop in that case
             // TODO: make more precise determination (fileAPI vs. Drag-n-drop)
@@ -115,7 +113,9 @@ YUI.add('ez-assets-manager', function (Y) {
             this.filesListNode.delegate('click', this._fileListDeleteClick, 'li a', this);
 
             this.dialogNode.delegate('click', this._uploadButtonClick, '.ez-ei-media-upload-dialog-button-upload', this);
-            this.dialogNode.delegate('click', this._closeUploadDialog, '.ez-ei-media-upload-dialog-button-cancel', this)
+            this.dialogNode.delegate('click', this._closeUploadDialog, '.ez-ei-media-upload-dialog-button-cancel', this);
+
+            this._viewModeSwitch.on('switch', this._viewModeSwitchSwitch, this);
 
             this._syncNodes();
 
@@ -390,6 +390,8 @@ YUI.add('ez-assets-manager', function (Y) {
         _uploadOldStyleFinish: function (){
             var that = this;
 
+            this._filesListWidget.update();
+
             this._progressBar.stopSimpleProgress();
             // show "all done!" label (which is behind the progress bar)
             this.progressBarNode.hide();
@@ -539,10 +541,15 @@ YUI.add('ez-assets-manager', function (Y) {
                 }
 
             }
+        },
+
+        _viewModeSwitchSwitch: function (e){
+            Y.log(e.newVal);
+            this._filesListWidget.switchMode(e.newVal);
         }
 
     });
 
     Y.eZ.AssetsManager = eZAssetsManager;
 
-}, '0.1alpha', ['widget','node']);
+}, '0.1alpha', ['widget','node','ez-switches']);
