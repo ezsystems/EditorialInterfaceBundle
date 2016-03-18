@@ -1,5 +1,5 @@
-Prototype of _a new editorial interface_ for eZ Publish 5.x
-===========================================================
+Prototype of _a new editorial interface_ for eZ Publish "6.x"
+=============================================================
 
 For now, it's only a prototype of _a new editorial interface_ for eZ Publish5.
 A static prototype is available in the `gh-pages` branch and is visible online
