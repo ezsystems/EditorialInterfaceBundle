@@ -23,3 +23,4 @@ Install
 * Clear the Symfony 2 caches with `ezpublish/console`
 
 ....
+..
